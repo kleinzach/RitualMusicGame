@@ -807,6 +807,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   accuracyCutoff: 0
   ComboText: {fileID: 1593761889}
+  mixer: {fileID: 24100000, guid: 37e6f0fe0f572e447b8fb9c7bfeef504, type: 2}
+  snap1: {fileID: 24586366, guid: 37e6f0fe0f572e447b8fb9c7bfeef504, type: 2}
+  scoreBreak1: 10
+  snap2: {fileID: 24530904, guid: 37e6f0fe0f572e447b8fb9c7bfeef504, type: 2}
+  scoreBreak2: 30
+  snap3: {fileID: 24525710, guid: 37e6f0fe0f572e447b8fb9c7bfeef504, type: 2}
+  scoreBreak3: 50
+  snap4: {fileID: 24592100, guid: 37e6f0fe0f572e447b8fb9c7bfeef504, type: 2}
 --- !u!4 &1079867413
 Transform:
   m_ObjectHideFlags: 0
@@ -1516,6 +1524,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BeatsPerMinute: 130
   DeltaTime: 0
+  AudioSourceTotalTime: 0
+  NumberOfLoops: 0
   IsBeat: 0
   images:
   - {fileID: 269329181}
