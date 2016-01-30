@@ -91,8 +91,8 @@ public class BeatRing : MonoBehaviour {
 
     internal void addBead()
     {
-        GameObject redGo = GameObject.Instantiate(RedBeadPrefab);
-        beadList.Add(redGo.GetComponent<Bead>());
+//        GameObject redGo = GameObject.Instantiate(RedBeadPrefab);
+//        beadList.Add(redGo.GetComponent<Bead>());
     }
 
     bool beadAlreadyHit;
