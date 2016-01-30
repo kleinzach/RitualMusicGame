@@ -10,9 +10,11 @@ public abstract class Bead : MonoBehaviour {
 
     public KeyCode key;
 
+    protected Renderer rend;
+
 	// Use this for initialization
 	void Start () {
-	
+        rend = GetComponentInChildren<Renderer>();
 	}
 	
 	// Update is called once per frame

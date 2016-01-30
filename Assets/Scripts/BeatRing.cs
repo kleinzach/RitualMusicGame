@@ -11,7 +11,7 @@ public class BeatRing : MonoBehaviour {
 
     Renderer rend;
 
-    float time= 1000;
+    public float time = 1000;
 
     //A speed scalar for the spin rate of this ring.
     public float speed;
@@ -41,6 +41,7 @@ public class BeatRing : MonoBehaviour {
 
     bool beadAlreadyHit;
     bool pastCenter;
+    int lastBead;
 	
 	/// <summary>
     /// Once per frame:
@@ -50,11 +51,11 @@ public class BeatRing : MonoBehaviour {
         //Increment the local time by the current speed
         time += speed * musicManager.DeltaTime;
 
-        transform.rotation = Quaternion.Euler(0, 0, (360/beadList.Count) * time);
+        transform.rotation = Quaternion.Euler(0, 0, (360/beadList.Count) * (time));
         
         //Calculate how close to the beat this frame is.
         frameAccuracy = Mathf.Abs(time % 1);
-
+        
         if(frameAccuracy < .5f)
         {
             pastCenter = false;
@@ -62,12 +63,12 @@ public class BeatRing : MonoBehaviour {
         }
         else
         {
-            if (!pastCenter && currentBead)
+            if (!pastCenter && currentBead && .5f - frameAccuracy < .1f && lastBead == currentBeadIndex)
             {
-                Debug.Log("Center");
                 currentBead.OnCenter();
             }
-            currentBeadIndex = (int)(time + Mathf.Sign(speed)) % beadList.Count;
+            pastCenter = true;
+            currentBeadIndex = (int)(time+1) % beadList.Count;
         }
 
         currentBead = beadList[currentBeadIndex];
@@ -79,7 +80,7 @@ public class BeatRing : MonoBehaviour {
 
         //Debug code to adjust color based on the beat
         rend.material.color = frameAccuracy > .9f ? new Color(1, 1, 1) : new Color(.5f, .5f, .5f);
-
+        lastBead = currentBeadIndex;
     }
 
     /// <summary>
@@ -123,5 +124,11 @@ public class BeatRing : MonoBehaviour {
         {
             return KeyCode.None;
         }
+    }
+
+    public void Score()
+    {
+        currentBead.OnHit(frameAccuracy);
+        Debug.Log(frameAccuracy);
     }
 }

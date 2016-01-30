@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System;
 
 public class NormalBead : Bead {
 
@@ -11,21 +10,12 @@ public class NormalBead : Bead {
 
     public override void OnHit(float accuracy)
     {
-
+        if(rend)
+            rend.material.color = Random.ColorHSV();
     }
 
     public override void OnMiss()
     {
 
     }
-
-    // Use this for initialization
-    void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }

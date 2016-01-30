@@ -20,7 +20,7 @@ public class InputManager : MonoBehaviour {
         List<KeyCode> keyPressedList = new List<KeyCode>();
         foreach (KeyCode key in keyList)
         {
-            if (Input.GetKeyDown(key))
+            if (key != KeyCode.None && Input.GetKeyDown(key))
             {
                 keyPressedList.Add(key);
             }
@@ -31,12 +31,13 @@ public class InputManager : MonoBehaviour {
             if (keyPressedList.Contains(ring.getCurrentKey()))
             {
                 keyPressedList.Remove(ring.getCurrentKey());
+                ring.Score();
                 // score points
             }
         }
         foreach (KeyCode key in keyPressedList)
         {
-            // lose points
+            Debug.Log("Fail! " + Time.time);
         }
 	}
 }

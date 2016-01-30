@@ -32,6 +32,7 @@ public class ReverseBead : Bead {
         {
             ring.speed = -ring.speed;
             lastCenter = Time.time;
+            //ring.time += Mathf.Sign(ring.speed) * 2 * (Time.time % 1);
         }
     }
 }
