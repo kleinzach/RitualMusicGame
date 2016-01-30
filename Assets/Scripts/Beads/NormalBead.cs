@@ -11,10 +11,15 @@ public class NormalBead : Bead {
     public override void OnHit(float accuracy)
     {
         if(rend)
-            rend.material.color = Color.black;
-        useTimer = .1f;
+            rend.color = Color.black;
+        useTimer = .25f;
         ScoreManager.ScoreBead(this, accuracy);
         asource.PlayOneShot(clip,accuracy);
+        if (particles)
+        {
+            particles.SetParticles(null, 0);
+            particles.Emit((int)(100 * accuracy));
+        }
     }
 
     public override void OnMiss()

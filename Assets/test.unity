@@ -121,6 +121,7 @@ MonoBehaviour:
   ringList:
   - {fileID: 1645072480}
   - {fileID: 1633678354}
+  - {fileID: 525753545}
 --- !u!4 &223053795
 Transform:
   m_ObjectHideFlags: 0
@@ -211,6 +212,7 @@ GameObject:
   - 33: {fileID: 525753543}
   - 135: {fileID: 525753542}
   - 23: {fileID: 525753541}
+  - 114: {fileID: 525753545}
   m_Layer: 0
   m_Name: InnerCircle
   m_TagString: Untagged
@@ -275,6 +277,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
+--- !u!114 &525753545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 525753540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10c9be7e7aa6c844db335519f422e0ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 1000
+  speed: 4.3333335
+  beadEnumList: 0100000001000000010000000000000001000000010000000100000000000000
+  currentBeadIndex: 0
+  currentBead: {fileID: 0}
+  frameAccuracy: 0
+  RedBeadPrefab: {fileID: 124396, guid: bcde15eccd5ab2d4591f3976578b8f74, type: 2}
+  BlueBeadPrefab: {fileID: 139894, guid: 4cb15a53679392a4fbe3dddc64f28229, type: 2}
+  YellowBeadPrefab: {fileID: 159738, guid: 6e4a5a4d7aff6b848bc18174b302d3d5, type: 2}
+  GreenBeadPrefab: {fileID: 156932, guid: 840c9d13f66509947bdb78d62782df98, type: 2}
 --- !u!1 &571535837
 GameObject:
   m_ObjectHideFlags: 0
@@ -640,7 +663,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1400947586}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071067}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

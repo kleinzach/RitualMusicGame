@@ -10,23 +10,26 @@ public abstract class Bead : MonoBehaviour {
 
     public KeyCode key;
 
-    protected Renderer rend;
+    protected SpriteRenderer rend;
 
     public float useTimer;
 
     protected AudioSource asource;
     public AudioClip clip;
 
+    protected ParticleSystem particles;
+
 	// Use this for initialization
 	void Start () {
-        rend = GetComponentInChildren<Renderer>();
+        rend = GetComponentInChildren<SpriteRenderer>();
         asource = GetComponent<AudioSource>();
+        particles = GetComponent<ParticleSystem>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
         useTimer -= Time.deltaTime;
-        rend.material.color = Color.Lerp(rend.material.color, Color.white, 10*Time.deltaTime);
+        rend.color = Color.Lerp(rend.material.color, Color.white, 10*Time.deltaTime);
 	}
 
     public abstract void OnHit(float accuracy);

@@ -201,6 +201,14 @@ Prefab:
       propertyPath: clip
       value: 
       objectReference: {fileID: 8300000, guid: d4a9ab5ce58f9da48ac18cd3ca459216, type: 3}
+    - target: {fileID: 0}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 156932}
