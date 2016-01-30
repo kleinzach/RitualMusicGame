@@ -89,10 +89,26 @@ public class BeatRing : MonoBehaviour {
 		musicManager = GameObject.Find("MusicManager").GetComponent<MusicManager>();
 	}
 
+    internal int rotate(int current, int direction)
+    {
+        return (current + direction + beadList.Count) % beadList.Count;
+    }
+
     internal void addBead()
     {
-//        GameObject redGo = GameObject.Instantiate(RedBeadPrefab);
-//        beadList.Add(redGo.GetComponent<Bead>());
+
+        // find the next bead to show in opposite direction of rotation.
+        currentBeadIndex = (int)(time) % beadList.Count;
+        var direction = Mathf.Sign(speed) > 0 ? -1 : 1;
+        for (int i = rotate(currentBeadIndex, direction); i % beadList.Count != currentBeadIndex; i = rotate(i, direction))
+        {
+            if (beadList[i] == null)
+            {
+                GameObject redGo = GameObject.Instantiate(RedBeadPrefab);
+                beadList[i] = redGo.GetComponent<Bead>();
+                break;
+            }
+        }
     }
 
     bool beadAlreadyHit;
