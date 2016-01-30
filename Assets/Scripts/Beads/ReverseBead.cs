@@ -28,11 +28,6 @@ public class ReverseBead : Bead {
 
     public override void OnBeat()
     {
-        if(Time.time > lastCenter + 1f)
-        {
-            ring.speed = -ring.speed;
-            lastCenter = Time.time;
-            //ring.time += Mathf.Sign(ring.speed) * 2 * (Time.time % 1);
-        }
+
     }
 }
