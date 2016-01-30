@@ -108,11 +108,42 @@ public class BeatRing : MonoBehaviour
 		musicManager = GameObject.Find("MusicManager").GetComponent<MusicManager>();
 	}
     
-    internal void addBead()
+    public bool addBead()
     {
-        //GameObject redGo = GameObject.Instantiate(RedBeadPrefab);
-        //beadList.Add(redGo.GetComponent<Bead>());
+        List<int> indices = new List<int>();
+        for(int i = 0; i < beadList.Count; i++)
+        {
+            if (!beadList[i])
+            {
+                indices.Add(i);
+            }
+        }
+        if(indices.Count > 0)
+        {
+            needNewBead = indices[Random.Range(0, indices.Count - 1)];
+            Debug.Log("Need new Bead: " + needNewBead);
+            return true;
+        }
+        else
+        {
+            needNewBead = -1;
+            return false;
+        }
     }
+
+    void tryAddBead()
+    {
+        int beadPosition = ((int)(currentBeadIndex - (Mathf.Sign(speed) * beadList.Count) / 4f + beadList.Count)) % beadList.Count;
+        if (needNewBead == beadPosition)
+        {
+            Debug.Log("Added");
+            beadList[needNewBead] = Instantiate<Bead>(RedBeadPrefab.GetComponent<Bead>());
+            needNewBead = -1;
+            DifficultyManager.readyForAnother = true;
+        }
+    }
+
+    int needNewBead = -1;
 
 	/// <summary>
 	/// Once per frame:
@@ -178,15 +209,15 @@ public class BeatRing : MonoBehaviour
 		float closestDistance = 99999.9f;
 		for (int i = 0; i < beadList.Count; i++)
 		{
-			if (beadList[i])
+            Vector3 pos = transform.TransformPoint(calculateBeadPosition(i));
+            if (Mathf.Abs(Vector3.Distance(pos, targetPos)) < closestDistance)
 			{
-				if (Mathf.Abs(Vector3.Distance(beadList[i].transform.position, targetPos)) < closestDistance)
-				{
-					closestDistance = Mathf.Abs(Vector3.Distance(beadList[i].transform.position, targetPos));
-					currentBead = beadList[i];
-					currentBeadIndex = i;
-				}
+                transform.TransformPoint(calculateBeadPosition(i));
+				closestDistance = Mathf.Abs(Vector3.Distance(pos, targetPos));
+				currentBead = beadList[i];
+				currentBeadIndex = i;
 			}
+			
 		}
 		//End Set Current Bead///////////////////////////////////////////////////////////////////////////////////////////
 
@@ -198,8 +229,21 @@ public class BeatRing : MonoBehaviour
 		//Debug code to adjust color based on the beat
 		rend.material.color = Color.Lerp(rend.material.color, Color.white, Time.deltaTime * 1f);
 		lastBead = currentBeadIndex;
+
+        if (needNewBead >= 0)
+        {
+            tryAddBead();
+        }
 	}
     int lastBead = 0;
+
+    Vector3 calculateBeadPosition(int i)
+    {
+        float lamda = -i * 2 * Mathf.PI / beadList.Count;
+        Vector3 pos = new Vector3(Mathf.Cos(lamda), Mathf.Sin(lamda), 0) / 2f;
+        return pos;
+
+    }
 
 	/// <summary>
 	/// Places the beads around the circle,
