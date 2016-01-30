@@ -15,9 +15,12 @@ public class BeatRing : MonoBehaviour {
 
     public int currentBead = 0;
 
-	// Use this for initialization
+    /// <summary>
+    /// Initialization by:
+    ///     Setting bead starting positions
+    /// </summary>
 	void Start () {
-	    
+        RecalculateBeadPositions();
 	}
 	
 	/// <summary>
@@ -29,4 +32,21 @@ public class BeatRing : MonoBehaviour {
         currentBead = (int)(Time.time * speed) % beadList.Count;
 
 	}
+
+    void RecalculateBeadPositions()
+    {
+        for (int i = 0; i < beadList.Count; i++)
+        {
+            Bead b = beadList[i];
+            float lamda = i * 2 * Mathf.PI / beadList.Count;
+            if (b)
+            {
+                b.transform.parent = null;
+                b.transform.localScale = Vector3.one;
+                b.transform.localRotation = Quaternion.Euler(Vector3.zero);
+                b.transform.parent = this.transform;
+                b.transform.localPosition = new Vector3(Mathf.Cos(lamda), Mathf.Sin(lamda), 0) / 2f;
+            }
+        }
+    }
 }
