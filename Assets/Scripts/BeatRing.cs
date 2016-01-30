@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using System;
 
 public enum BeadEnum
 {
@@ -165,15 +164,13 @@ public class BeatRing : MonoBehaviour
 
 		if (nextBead)
 		{
-			if (nextBead.GetType() == typeof(ReverseBead))
-			{
-				Vector3 targetPosNoZ = new Vector3(targetPos.x, targetPos.y, nextBead.transform.position.z);
-				if (Mathf.Abs(Vector3.Distance(nextBead.transform.position, targetPosNoZ)) < 0.3f)
-				{
-					this.NeedsReversing = true;
-				}
-			}
-		}
+            Vector3 targetPosNoZ = new Vector3(targetPos.x, targetPos.y, nextBead.transform.position.z);
+            if (Mathf.Abs(Vector3.Distance(nextBead.transform.position, targetPosNoZ)) < 0.3f)
+            {
+                nextBead.OnBeat();
+                rend.material.color = Random.ColorHSV(0, 1, .5f, 1f, .5f, 1f);
+            }
+        }
 
 		//End Set Next Bead////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -199,8 +196,7 @@ public class BeatRing : MonoBehaviour
 		RecalculateBeadPositions();
 
 		//Debug code to adjust color based on the beat
-		rend.material.color = Color.Lerp(rend.material.color, Color.white, Time.deltaTime * 10f);
-		rend.material.color = frameAccuracy > .9f ? Color.black : rend.material.color;
+		rend.material.color = Color.Lerp(rend.material.color, Color.white, Time.deltaTime * 1f);
 		lastBead = currentBeadIndex;
 	}
     int lastBead = 0;

@@ -20,6 +20,8 @@ public abstract class Bead : MonoBehaviour {
     public Color hitColor;
 	public bool IsNext;
 
+    public Vector3 targetScale = Vector3.one;
+
 	// Use this for initialization
 	void Start () {
         rend = GetComponentInChildren<SpriteRenderer>();
@@ -30,6 +32,7 @@ public abstract class Bead : MonoBehaviour {
 	void Update () {
         useTimer -= Time.deltaTime;
         rend.color = Color.Lerp(rend.material.color, Color.white, 10*Time.deltaTime);
+        targetScale = Vector3.Lerp(targetScale, Vector3.one, Time.deltaTime);
 	}
 
     public abstract void OnHit(float accuracy);

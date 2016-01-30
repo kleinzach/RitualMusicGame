@@ -26,7 +26,7 @@ public class MainVisualizer : MonoBehaviour {
         ParticleSystem.Particle[] particles = new ParticleSystem.Particle[singleton.circlePs.particleCount];
         singleton.circlePs.GetParticles(particles);
         singleton.circlePs.SetParticles(particles, singleton.circlePs.particleCount);
-        singleton.circlePs.Emit((int)( 25 * accuracy));
+        singleton.circlePs.Emit((int)( 10 * accuracy));
     }
 
     public static void Beat(float amount)
@@ -34,7 +34,7 @@ public class MainVisualizer : MonoBehaviour {
         ParticleSystem.Particle[] particles = new ParticleSystem.Particle[singleton.squarePs.particleCount];
         singleton.squarePs.GetParticles(particles);
         singleton.squarePs.SetParticles(particles, singleton.squarePs.particleCount);
-        singleton.squarePs.Emit((int)(ScoreManager.singleton.Combo * 5 * amount));
+        singleton.squarePs.Emit((int)(ScoreManager.singleton.Combo * amount));
     }
 
     public static void Miss()

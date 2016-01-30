@@ -4,12 +4,18 @@ using System;
 
 public class SpeedAdjustBead : Bead {
 
-    public float speedAdjust = .1f;
+    public float speedAdjust = 2f;
 
     public override void OnBeat()
     {
-        MusicManager.singleton.Speed += speedAdjust;
-        Debug.Log(MusicManager.singleton.Speed);
+        if ((Time.time - useTimer) > .5f)
+        {
+            //MusicManager.singleton.Speed += speedAdjust;
+            ring.speed *= speedAdjust;
+            speedAdjust = 1 / speedAdjust;
+            useTimer = Time.time;
+            Debug.Log("BEAT");
+        }
     }
 
     public override void OnHit(float accuracy)

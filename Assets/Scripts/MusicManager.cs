@@ -46,6 +46,7 @@ public class MusicManager : MonoBehaviour {
             {
                 s.pitch = value;
             }
+            Debug.Log(_speed);
         }
     }
 

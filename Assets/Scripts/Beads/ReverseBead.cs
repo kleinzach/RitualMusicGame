@@ -3,20 +3,11 @@ using System.Collections;
 using System;
 
 public class ReverseBead : Bead {
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    
     
     public override void OnHit(float accuracy)
     {
-        useTimer = 1f;
+        useTimer = Time.time;
     }
 
     public override void OnMiss()
@@ -28,6 +19,10 @@ public class ReverseBead : Bead {
 
     public override void OnBeat()
     {
-
+        if ((Time.time - useTimer) > .1f)
+        {
+            ring.NeedsReversing = true;
+            useTimer = Time.time;
+        }
     }
 }

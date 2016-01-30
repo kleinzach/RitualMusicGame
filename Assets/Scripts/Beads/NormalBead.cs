@@ -5,7 +5,7 @@ public class NormalBead : Bead {
 
     public override void OnBeat()
     {
-
+        //targetScale = Vector3.one * .5f;
     }
 
     public override void OnHit(float accuracy)
