@@ -17,13 +17,10 @@ public abstract class Bead : MonoBehaviour {
     protected AudioSource asource;
     public AudioClip clip;
 
-    protected ParticleSystem particles;
-
 	// Use this for initialization
 	void Start () {
         rend = GetComponentInChildren<SpriteRenderer>();
         asource = GetComponent<AudioSource>();
-        particles = GetComponent<ParticleSystem>();
 	}
 	
 	// Update is called once per frame

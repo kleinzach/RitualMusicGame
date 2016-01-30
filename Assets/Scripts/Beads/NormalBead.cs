@@ -15,11 +15,7 @@ public class NormalBead : Bead {
         useTimer = .25f;
         ScoreManager.ScoreBead(this, accuracy);
         asource.PlayOneShot(clip,accuracy);
-        if (particles)
-        {
-            particles.SetParticles(null, 0);
-            particles.Emit((int)(100 * accuracy));
-        }
+        MainVisualizer.Hit(accuracy);
     }
 
     public override void OnMiss()
