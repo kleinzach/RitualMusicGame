@@ -14,6 +14,12 @@ public class MusicManager : MonoBehaviour {
 	//DeltaTime to use to sent to music 
 	public float DeltaTime = 0.0f;
 
+	//The total time elapsed of the source
+	public float AudioSourceTotalTime;
+
+	//The number of times the music has looped
+	public int NumberOfLoops;
+
 	//Whether or not this frame is a beat.
 	public bool IsBeat = false;
 
@@ -32,23 +38,38 @@ public class MusicManager : MonoBehaviour {
 	//audioSource.time at the last frame
 	private float lastAudioSourceTime;
 
+	//AudioSourceTotalTime in the last frame;
+	private float lastAudioSourceTotalTime;
+
 	// Use this for initialization
 	void Start () {
 		audioSource = this.GetComponent<AudioSource>();
 
+		//Initialize variables;
 		float beatsPerSecond = BeatsPerMinute / 60.0f;
 		secondsPerBeat = 1.0f / beatsPerSecond;
 		nextBeat = secondsPerBeat;
 		lastAudioSourceTime = 0.0f;
+		lastAudioSourceTotalTime = 0.0f;
 		IsBeat = false;
+		NumberOfLoops = 0;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		//Set DeltaTime
-		float audioSourceTime = audioSource.time;
-		DeltaTime = audioSourceTime - lastAudioSourceTime;
 
+		//Set AudioSourceTime and AudioSourceTotalTime
+		float audioSourceTime = audioSource.time;
+		if (audioSourceTime < lastAudioSourceTime)
+		{
+			//If we have looped
+			NumberOfLoops++;
+		}
+		AudioSourceTotalTime = NumberOfLoops * audioSource.clip.length + audioSourceTime;
+
+		//Set DeltaTime
+		DeltaTime = AudioSourceTotalTime - lastAudioSourceTotalTime;
+		
 		//Dim Strobes
 		for (int i = 0; i < images.Length; i++)
 		{
@@ -56,11 +77,12 @@ public class MusicManager : MonoBehaviour {
 		}
 
 		//Play a beat if needed
-		if (audioSourceTime > nextBeat)
+		if (AudioSourceTotalTime > nextBeat)
 		{
 			//Play a beat
 			IsBeat = true;
 			nextBeat += secondsPerBeat;
+
 			for (int i = 0; i < images.Length; i++)
 			{
 				images[i].color = new Color(images[i].color.r, images[i].color.g, images[i].color.b, 1.0f);
@@ -72,5 +94,6 @@ public class MusicManager : MonoBehaviour {
 		}
 
 		lastAudioSourceTime = audioSourceTime;
+		lastAudioSourceTotalTime = AudioSourceTotalTime;
 	}
 }
