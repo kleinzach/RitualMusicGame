@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public enum BeadEnum
 {
@@ -87,6 +88,12 @@ public class BeatRing : MonoBehaviour {
         RecalculateBeadPositions();
 		musicManager = GameObject.Find("MusicManager").GetComponent<MusicManager>();
 	}
+
+    internal void addBead()
+    {
+        GameObject redGo = GameObject.Instantiate(RedBeadPrefab);
+        beadList.Add(redGo.GetComponent<Bead>());
+    }
 
     bool beadAlreadyHit;
     bool pastCenter;

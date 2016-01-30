@@ -75,6 +75,10 @@ public class ScoreManager : MonoBehaviour {
         if(accuracy > singleton.accuracyCutoff)
         {
             singleton.score++;
+            if (singleton.score % 5 == 0)
+            {
+                b.ring.addBead();
+            }
         }
         else
         {
