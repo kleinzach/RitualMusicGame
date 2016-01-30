@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 /// <summary>
 /// Manages Music.  Provides a DeltaTime and if the current frame is a beat.
@@ -93,7 +94,33 @@ public class MusicManager : MonoBehaviour {
 			IsBeat = false;
 		}
 
+        float[] data = new float[100];
+        audioSource.GetOutputData(data, 0);
+
+        float total = 0;
+        foreach(float d in data)
+        {
+            total += d;
+        }
+        total /= 100f;
+        Amplitude = Mathf.Abs(total) * 5;
+
 		lastAudioSourceTime = audioSourceTime;
 		lastAudioSourceTotalTime = AudioSourceTotalTime;
 	}
+
+    //[HideInInspector]
+    public float Amplitude
+    {
+        set
+        {
+            Vector3 scale = Vector3.one * value;
+            foreach (GameObject g in visualizers)
+            {
+                g.transform.localScale = scale;
+            }
+        }
+    }
+
+    public GameObject[] visualizers;
 }
