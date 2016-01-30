@@ -16,8 +16,9 @@ public abstract class Bead : MonoBehaviour {
 
     protected AudioSource asource;
     public AudioClip clip;
-
+    
     public Color hitColor;
+	public bool IsNext;
 
 	// Use this for initialization
 	void Start () {

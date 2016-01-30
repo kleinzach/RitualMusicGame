@@ -27,6 +27,9 @@ public class MusicManager : MonoBehaviour {
 	//Images to flash on a beat
 	public Image[] images;
 
+	//How close to the beat.  1 on beat.  0.1 after beat.  0.9 near beat.
+	public float Accuracy;
+
 	//Music
 	private AudioSource audioSource;
     public AudioSource[] backgroundMusic;
@@ -96,6 +99,7 @@ public class MusicManager : MonoBehaviour {
 		{
 			//Play a beat
 			IsBeat = true;
+			Accuracy = 1.0f;
 			nextBeat += secondsPerBeat;
 
             MainVisualizer.Beat(1f);
@@ -108,6 +112,7 @@ public class MusicManager : MonoBehaviour {
 		else
 		{
 			IsBeat = false;
+			Accuracy = (secondsPerBeat - (nextBeat - AudioSourceTotalTime)) / secondsPerBeat;
 		}
 
         float[] data = new float[100];

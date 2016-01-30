@@ -418,6 +418,8 @@ MonoBehaviour:
   BlueBeadPrefab: {fileID: 139894, guid: 4cb15a53679392a4fbe3dddc64f28229, type: 2}
   YellowBeadPrefab: {fileID: 159738, guid: 6e4a5a4d7aff6b848bc18174b302d3d5, type: 2}
   GreenBeadPrefab: {fileID: 156932, guid: 840c9d13f66509947bdb78d62782df98, type: 2}
+  ReverseBeadPrefab: {fileID: 124254, guid: b0d910f5c47cab34fa9b24b8cda04be6, type: 2}
+  NeedsReversing: 0
 --- !u!1 &571535837
 GameObject:
   m_ObjectHideFlags: 0
@@ -2675,7 +2677,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   time: 1000
   speed: 1.0833335
-  beadEnumList: 00000000020000000000000000000000020000000200000000000000030000000000000002000000
+  beadEnumList: 00000000050000000000000000000000020000000200000000000000030000000000000002000000
   currentBeadIndex: 0
   currentBead: {fileID: 0}
   frameAccuracy: 0
@@ -2683,6 +2685,8 @@ MonoBehaviour:
   BlueBeadPrefab: {fileID: 139894, guid: 4cb15a53679392a4fbe3dddc64f28229, type: 2}
   YellowBeadPrefab: {fileID: 159738, guid: 6e4a5a4d7aff6b848bc18174b302d3d5, type: 2}
   GreenBeadPrefab: {fileID: 156932, guid: 840c9d13f66509947bdb78d62782df98, type: 2}
+  ReverseBeadPrefab: {fileID: 124254, guid: b0d910f5c47cab34fa9b24b8cda04be6, type: 2}
+  NeedsReversing: 0
 --- !u!1 &1645072475
 GameObject:
   m_ObjectHideFlags: 0
@@ -2780,6 +2784,8 @@ MonoBehaviour:
   BlueBeadPrefab: {fileID: 139894, guid: 4cb15a53679392a4fbe3dddc64f28229, type: 2}
   YellowBeadPrefab: {fileID: 159738, guid: 6e4a5a4d7aff6b848bc18174b302d3d5, type: 2}
   GreenBeadPrefab: {fileID: 156932, guid: 840c9d13f66509947bdb78d62782df98, type: 2}
+  ReverseBeadPrefab: {fileID: 124254, guid: b0d910f5c47cab34fa9b24b8cda04be6, type: 2}
+  NeedsReversing: 0
 --- !u!1 &1696202719
 GameObject:
   m_ObjectHideFlags: 0
@@ -2880,6 +2886,8 @@ MonoBehaviour:
   images:
   - {fileID: 269329181}
   - {fileID: 1163982343}
+  Accuracy: 0
+  backgroundMusic: []
   visualizers: []
 --- !u!82 &1838124299
 AudioSource:
