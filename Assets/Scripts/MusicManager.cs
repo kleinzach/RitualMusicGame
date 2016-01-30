@@ -84,6 +84,8 @@ public class MusicManager : MonoBehaviour {
 			IsBeat = true;
 			nextBeat += secondsPerBeat;
 
+            MainVisualizer.Beat(.1f);
+
 			for (int i = 0; i < images.Length; i++)
 			{
 				images[i].color = new Color(images[i].color.r, images[i].color.g, images[i].color.b, 1.0f);

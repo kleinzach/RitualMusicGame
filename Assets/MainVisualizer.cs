@@ -6,11 +6,11 @@ public class MainVisualizer : MonoBehaviour {
 
     public static MainVisualizer singleton;
 
-    ParticleSystem ps;
+    public ParticleSystem circlePs;
+    public ParticleSystem squarePs;
 
-	// Use this for initialization
-	void Start () {
-        ps = GetComponent<ParticleSystem>();
+    // Use this for initialization
+    void Start () {
         singleton = this;
 	}
 	
@@ -21,7 +21,17 @@ public class MainVisualizer : MonoBehaviour {
 
     public static void Hit(float accuracy)
     {
-        singleton.ps.SetParticles(null, 0);
-        singleton.ps.Emit((int)(100 * accuracy));
+        ParticleSystem.Particle[] particles = new ParticleSystem.Particle[singleton.circlePs.particleCount];
+        singleton.circlePs.GetParticles(particles);
+        singleton.circlePs.SetParticles(particles, singleton.circlePs.particleCount);
+        singleton.circlePs.Emit((int)( 25 * accuracy));
+    }
+
+    public static void Beat(float amount)
+    {
+        ParticleSystem.Particle[] particles = new ParticleSystem.Particle[singleton.squarePs.particleCount];
+        singleton.squarePs.GetParticles(particles);
+        singleton.squarePs.SetParticles(particles, singleton.squarePs.particleCount);
+        singleton.squarePs.Emit((int)(ScoreManager.singleton.score * 5 * amount));
     }
 }
