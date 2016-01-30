@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using System;
 
 public enum BeadEnum
 {
@@ -137,7 +136,7 @@ public class BeatRing : MonoBehaviour {
 
         //Debug code to adjust color based on the beat
         rend.material.color = Color.Lerp(rend.material.color, Color.white, Time.deltaTime * 10f);
-        rend.material.color = frameAccuracy > .9f ? Color.black : rend.material.color;
+        rend.material.color = frameAccuracy > .9f ? Random.ColorHSV(0,1,0,1,0,1f) : rend.material.color;
         lastBead = currentBeadIndex;
     }
 

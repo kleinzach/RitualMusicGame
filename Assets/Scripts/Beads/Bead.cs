@@ -17,6 +17,8 @@ public abstract class Bead : MonoBehaviour {
     protected AudioSource asource;
     public AudioClip clip;
 
+    public Color hitColor = Color.black;
+
 	// Use this for initialization
 	void Start () {
         rend = GetComponentInChildren<SpriteRenderer>();
@@ -26,7 +28,7 @@ public abstract class Bead : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         useTimer -= Time.deltaTime;
-        rend.color = Color.Lerp(rend.material.color, Color.white, 10*Time.deltaTime);
+        rend.color = Color.Lerp(rend.color, Color.gray, 1f * Time.deltaTime);
 	}
 
     public abstract void OnHit(float accuracy);

@@ -10,8 +10,7 @@ public class NormalBead : Bead {
 
     public override void OnHit(float accuracy)
     {
-        if(rend)
-            rend.color = Color.black;
+        rend.color = hitColor;
         useTimer = .25f;
         ScoreManager.ScoreBead(this, accuracy);
         asource.PlayOneShot(clip,accuracy);
