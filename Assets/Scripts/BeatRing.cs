@@ -2,6 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 
+public enum BeadEnum
+{
+	None,
+	Red,
+	Green,
+	Blue,
+	Yellow
+}
+
 /// <summary>
 /// One of the concentric rings.
 /// Spins at a fixed rate, with beads on it which demand input.
@@ -16,8 +25,8 @@ public class BeatRing : MonoBehaviour {
     //A speed scalar for the spin rate of this ring.
     public float speed;
 
-    //A list of all beads around this ring, blank spaces representing no input required.
-    public List<Bead> beadList;
+	//Enums defining Beads in ring
+	public List<BeadEnum> beadEnumList;
 
     //The closest bead on this ring.
     public int currentBeadIndex = 0;
@@ -25,6 +34,15 @@ public class BeatRing : MonoBehaviour {
 
     //How close to accurate a button press would be on this frame.
     public float frameAccuracy = 0;
+
+	//Prefabs
+	public GameObject RedBeadPrefab;
+	public GameObject BlueBeadPrefab;
+	public GameObject YellowBeadPrefab;
+	public GameObject GreenBeadPrefab;
+
+    //A list of all beads around this ring, blank spaces representing no input required.
+    private List<Bead> beadList;
 
 	//The scene's MusicManager.  Will provides its own deltaTime and IsBeat
 	private MusicManager musicManager;
@@ -34,7 +52,38 @@ public class BeatRing : MonoBehaviour {
 	///     Setting bead starting positions
 	/// </summary>
 	void Start () {
-        rend = GetComponent<Renderer>();
+
+		//Build beadList
+		beadList = new List<Bead>();
+		foreach (var beadEnum in beadEnumList)
+		{
+			switch (beadEnum)
+			{
+				case BeadEnum.None:
+					beadList.Add(null);
+					break;
+				case BeadEnum.Red:
+					GameObject redGo = GameObject.Instantiate(RedBeadPrefab);
+					beadList.Add(redGo.GetComponent<Bead>());
+					break;
+				case BeadEnum.Green:
+					GameObject greenGo = GameObject.Instantiate(GreenBeadPrefab);
+					beadList.Add(greenGo.GetComponent<Bead>());
+					break;
+				case BeadEnum.Blue:
+					GameObject blueGo = GameObject.Instantiate(BlueBeadPrefab);
+					beadList.Add(blueGo.GetComponent<Bead>());
+					break;
+				case BeadEnum.Yellow:
+					GameObject yellowGo = GameObject.Instantiate(YellowBeadPrefab);
+					beadList.Add(yellowGo.GetComponent<Bead>());
+					break;
+				default:
+					break;
+			}
+		}
+
+		rend = GetComponent<Renderer>();
         RecalculateBeadPositions();
 		musicManager = GameObject.Find("MusicManager").GetComponent<MusicManager>();
 	}

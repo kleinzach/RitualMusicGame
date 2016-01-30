@@ -1,10 +1,15 @@
 fileFormatVersion: 2
 guid: 10c9be7e7aa6c844db335519f422e0ce
-timeCreated: 1454120352
-licenseType: Free
+timeCreated: 1454168523
+licenseType: Pro
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - currentBead: {instanceID: 0}
+  - RedBeadPrefab: {fileID: 124396, guid: bcde15eccd5ab2d4591f3976578b8f74, type: 2}
+  - BlueBeadPrefab: {fileID: 139894, guid: 4cb15a53679392a4fbe3dddc64f28229, type: 2}
+  - YellowBeadPrefab: {fileID: 159738, guid: 6e4a5a4d7aff6b848bc18174b302d3d5, type: 2}
+  - GreenBeadPrefab: {fileID: 156932, guid: 840c9d13f66509947bdb78d62782df98, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
