@@ -10,7 +10,8 @@ public enum BeadEnum
 	Blue,
 	Yellow,
 	Reverse,
-    Speedup
+    Speedup,
+	Marker,
 }
 
 /// <summary>
@@ -45,12 +46,13 @@ public class BeatRing : MonoBehaviour
 	public GameObject GreenBeadPrefab;
 	public GameObject ReverseBeadPrefab;
     public GameObject SpeedUpBeadPrefab;
+	public GameObject MarkerBeadPrefab;
 
     //Reverse on next beat
     public bool NeedsReversing;
 
 	//A list of all beads around this ring, blank spaces representing no input required.
-	private List<Bead> beadList;
+	public List<Bead> beadList;
 
 	//The scene's MusicManager.  Will provides its own deltaTime and IsBeat
 	private MusicManager musicManager;
@@ -73,6 +75,10 @@ public class BeatRing : MonoBehaviour
 			{
 				case BeadEnum.None:
 					beadList.Add(null);
+					break;
+				case BeadEnum.Marker:
+					GameObject markerGo = GameObject.Instantiate(MarkerBeadPrefab);
+					beadList.Add(markerGo.GetComponent<Bead>());
 					break;
 				case BeadEnum.Red:
 					GameObject redGo = GameObject.Instantiate(RedBeadPrefab);
