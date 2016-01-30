@@ -16,7 +16,7 @@ public class ReverseBead : Bead {
     
     public override void OnHit(float accuracy)
     {
-
+        useTimer = 1f;
     }
 
     public override void OnMiss()
@@ -26,7 +26,7 @@ public class ReverseBead : Bead {
 
     float lastCenter = 0f;
 
-    public override void OnCenter()
+    public override void OnBeat()
     {
         if(Time.time > lastCenter + 1f)
         {

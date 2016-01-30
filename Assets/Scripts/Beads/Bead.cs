@@ -12,6 +12,8 @@ public abstract class Bead : MonoBehaviour {
 
     protected Renderer rend;
 
+    public float useTimer;
+
 	// Use this for initialization
 	void Start () {
         rend = GetComponentInChildren<Renderer>();
@@ -19,10 +21,11 @@ public abstract class Bead : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+        useTimer -= Time.deltaTime;
+        rend.material.color = Color.Lerp(rend.material.color, Color.white, 10*Time.deltaTime);
 	}
 
     public abstract void OnHit(float accuracy);
     public abstract void OnMiss();
-    public abstract void OnCenter();
+    public abstract void OnBeat();
 }

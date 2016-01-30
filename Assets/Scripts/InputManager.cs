@@ -18,25 +18,36 @@ public class InputManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         List<KeyCode> keyPressedList = new List<KeyCode>();
+        List<KeyCode> keyPressedLeftList = new List<KeyCode>();
         foreach (KeyCode key in keyList)
         {
             if (key != KeyCode.None && Input.GetKeyDown(key))
             {
                 keyPressedList.Add(key);
             }
-                
+
         }
+        keyPressedLeftList = keyPressedList;
+
+        //For each of the rings in the scene...
         foreach (BeatRing ring in ringList)
         {
+            //Check to see if a key pressed cooresponds to the ring's current bead.
             if (keyPressedList.Contains(ring.getCurrentKey()))
             {
-                keyPressedList.Remove(ring.getCurrentKey());
+                if (keyPressedLeftList.Contains(ring.getCurrentKey()))
+                {
+                    keyPressedLeftList.Remove(ring.getCurrentKey());
+                }
+                Debug.Log("SCore");
                 ring.Score();
                 // score points
             }
         }
-        foreach (KeyCode key in keyPressedList)
+        //Send a fail signal for each key that was pressed and wasnt an input.
+        foreach (KeyCode key in keyPressedLeftList)
         {
+            ScoreManager.Miss();
             Debug.Log("Fail! " + Time.time);
         }
 	}

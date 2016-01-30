@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class BeatManager : MonoBehaviour {
-
+    
 	// Use this for initialization
 	void Start () {
 	
@@ -10,6 +10,6 @@ public class BeatManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+
 	}
 }

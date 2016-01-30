@@ -65,7 +65,8 @@ public class BeatRing : MonoBehaviour {
         {
             if (!pastCenter && currentBead && .5f - frameAccuracy < .1f && lastBead == currentBeadIndex)
             {
-                currentBead.OnCenter();
+                currentBead.OnBeat();
+                rend.material.color = Color.black;
             }
             pastCenter = true;
             currentBeadIndex = (int)(time+1) % beadList.Count;
@@ -79,7 +80,8 @@ public class BeatRing : MonoBehaviour {
         RecalculateBeadPositions();
 
         //Debug code to adjust color based on the beat
-        rend.material.color = frameAccuracy > .9f ? new Color(1, 1, 1) : new Color(.5f, .5f, .5f);
+        rend.material.color = Color.Lerp(rend.material.color, Color.white, Time.deltaTime * 10f);
+        rend.material.color = frameAccuracy > .9f ? Color.black : rend.material.color;
         lastBead = currentBeadIndex;
     }
 
@@ -116,7 +118,7 @@ public class BeatRing : MonoBehaviour {
 
     public KeyCode getCurrentKey()
     {
-        if (currentBead)
+        if (currentBead && currentBead.useTimer < 0f)
         {
             return currentBead.key;
         }
