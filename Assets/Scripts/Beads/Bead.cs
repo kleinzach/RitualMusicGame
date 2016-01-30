@@ -14,9 +14,13 @@ public abstract class Bead : MonoBehaviour {
 
     public float useTimer;
 
+    protected AudioSource asource;
+    public AudioClip clip;
+
 	// Use this for initialization
 	void Start () {
         rend = GetComponentInChildren<Renderer>();
+        asource = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame

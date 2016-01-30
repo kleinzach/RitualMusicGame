@@ -14,6 +14,7 @@ public class NormalBead : Bead {
             rend.material.color = Color.black;
         useTimer = .1f;
         ScoreManager.ScoreBead(this, accuracy);
+        asource.PlayOneShot(clip,accuracy);
     }
 
     public override void OnMiss()
