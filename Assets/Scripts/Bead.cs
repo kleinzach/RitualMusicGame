@@ -8,6 +8,8 @@ public class Bead : MonoBehaviour {
     //Pointer to the ring this bead is on.
     public BeatRing ring;
 
+    public KeyCode key;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -18,14 +20,13 @@ public class Bead : MonoBehaviour {
 	
 	}
 
-    void OnHit()
+    public void OnHit(float accuracy)
     {
 
     }
-    void OnMiss()
+    public void OnMiss()
     {
 
     }
-
 
 }

@@ -19,8 +19,9 @@ public class BeatRing : MonoBehaviour {
     //A list of all beads around this ring, blank spaces representing no input required.
     public List<Bead> beadList;
 
-    //The index of the upcoming bead for this ring.
-    public int currentBead = 0;
+    //The closest bead on this ring.
+    public int currentBeadIndex = 0;
+    public Bead currentBead;
 
     //How close to accurate a button press would be on this frame.
     public float frameAccuracy = 0;
@@ -33,6 +34,8 @@ public class BeatRing : MonoBehaviour {
         rend = GetComponent<Renderer>();
         RecalculateBeadPositions();
 	}
+
+    bool beadAlreadyHit;
 	
 	/// <summary>
     /// Once per frame:
@@ -47,8 +50,9 @@ public class BeatRing : MonoBehaviour {
         //Calculate how close to the beat this frame is.
         frameAccuracy = Mathf.Abs(time % 1);
 
-        currentBead = frameAccuracy < .5f ? (int)(time) % beadList.Count : (int)(time + 1) % beadList.Count;
-
+        currentBeadIndex = frameAccuracy < .5f ? (int)(time) % beadList.Count : (int)(time + 1) % beadList.Count;
+        currentBead = beadList[currentBeadIndex];
+        
         frameAccuracy = 2*Mathf.Abs(.5f - frameAccuracy);
 
         //Reposition the beads.
@@ -85,6 +89,18 @@ public class BeatRing : MonoBehaviour {
                 b.transform.parent = this.transform;
                 b.transform.localPosition = new Vector3(Mathf.Cos(lamda), Mathf.Sin(lamda), 0) / 2f;
             }
+        }
+    }
+
+    public KeyCode getCurrentKey()
+    {
+        if (currentBead)
+        {
+            return currentBead.key;
+        }
+        else
+        {
+            return KeyCode.None;
         }
     }
 }

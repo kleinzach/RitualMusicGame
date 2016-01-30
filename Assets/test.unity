@@ -813,7 +813,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10c9be7e7aa6c844db335519f422e0ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 1
   beadList:
   - {fileID: 987291832}
   - {fileID: 0}
@@ -827,7 +827,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  currentBead: 0
+  currentBeadIndex: 0
+  currentBead: {fileID: 0}
   frameAccuracy: 0
 --- !u!1 &1645072475
 GameObject:
@@ -920,7 +921,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10c9be7e7aa6c844db335519f422e0ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2.1666667
+  speed: 1
   beadList:
   - {fileID: 987291832}
   - {fileID: 1348137945}
@@ -928,7 +929,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 391591413}
   - {fileID: 0}
-  currentBead: 0
+  currentBeadIndex: 0
+  currentBead: {fileID: 0}
   frameAccuracy: 0
 --- !u!1 &1696202719
 GameObject:
