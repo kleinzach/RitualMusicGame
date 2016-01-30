@@ -27,7 +27,7 @@ public class InputManager : MonoBehaviour {
             }
 
         }
-        keyPressedLeftList = keyPressedList;
+        keyPressedLeftList = new List<KeyCode>( keyPressedList);
 
         //For each of the rings in the scene...
         foreach (BeatRing ring in ringList)
