@@ -17,6 +17,8 @@ public abstract class Bead : MonoBehaviour {
     protected AudioSource asource;
     public AudioClip clip;
 
+    public Color hitColor;
+
 	// Use this for initialization
 	void Start () {
         rend = GetComponentInChildren<SpriteRenderer>();

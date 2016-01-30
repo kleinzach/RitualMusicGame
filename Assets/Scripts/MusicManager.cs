@@ -29,6 +29,20 @@ public class MusicManager : MonoBehaviour {
 
 	//Music
 	private AudioSource audioSource;
+    public AudioSource[] backgroundMusic;
+
+    float _speed = 1;
+    public float Speed
+    {
+        get { return _speed; }
+        set { _speed = value;
+            audioSource.pitch = value;
+            foreach(AudioSource s in backgroundMusic)
+            {
+                s.pitch = value;
+            }
+        }
+    }
 
 	//Seconds per beat.  Set through BeatsPerMinute
 	private float secondsPerBeat;
@@ -83,6 +97,8 @@ public class MusicManager : MonoBehaviour {
 			//Play a beat
 			IsBeat = true;
 			nextBeat += secondsPerBeat;
+
+            MainVisualizer.Beat(1f);
 
 			for (int i = 0; i < images.Length; i++)
 			{

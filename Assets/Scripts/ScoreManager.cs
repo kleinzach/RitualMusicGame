@@ -96,11 +96,11 @@ public class ScoreManager : MonoBehaviour {
         }
         else
         {
-            singleton.Score = 0f;
+            singleton.Combo = 0f;
         }
     }
     public static void Miss()
     {
-        singleton.Score = 0f;
+        singleton.Combo = 0f;
     }
 }
