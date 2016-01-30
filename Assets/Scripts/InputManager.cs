@@ -39,7 +39,6 @@ public class InputManager : MonoBehaviour {
                 {
                     keyPressedLeftList.Remove(ring.getCurrentKey());
                 }
-                Debug.Log("SCore");
                 ring.Score();
                 // score points
             }

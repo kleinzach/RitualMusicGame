@@ -10,7 +10,8 @@ public enum BeadEnum
 	Green,
 	Blue,
 	Yellow,
-	Reverse
+	Reverse,
+    Speedup
 }
 
 /// <summary>
@@ -44,9 +45,10 @@ public class BeatRing : MonoBehaviour
 	public GameObject YellowBeadPrefab;
 	public GameObject GreenBeadPrefab;
 	public GameObject ReverseBeadPrefab;
+    public GameObject SpeedUpBeadPrefab;
 
-	//Reverse on next beat
-	public bool NeedsReversing;
+    //Reverse on next beat
+    public bool NeedsReversing;
 
 	//A list of all beads around this ring, blank spaces representing no input required.
 	private List<Bead> beadList;
@@ -93,6 +95,10 @@ public class BeatRing : MonoBehaviour
 					GameObject reverseGo = GameObject.Instantiate(ReverseBeadPrefab);
 					beadList.Add(reverseGo.GetComponent<Bead>());
 					break;
+                case BeadEnum.Speedup:
+                    GameObject speedGo = GameObject.Instantiate(SpeedUpBeadPrefab);
+                    beadList.Add(speedGo.GetComponent<Bead>());
+                    break;
 				default:
 					break;
 			}
@@ -245,6 +251,5 @@ public class BeatRing : MonoBehaviour
 	public void Score()
 	{
 		currentBead.OnHit(frameAccuracy);
-		Debug.Log(frameAccuracy);
 	}
 }

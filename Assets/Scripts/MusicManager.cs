@@ -9,6 +9,8 @@ using UnityEngine.Audio;
 /// </summary>
 public class MusicManager : MonoBehaviour {
 
+    public static MusicManager singleton;
+
 	//Beats per minute should match the music
 	public float BeatsPerMinute = 130.0f;
 
@@ -61,6 +63,8 @@ public class MusicManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        singleton = this;
+
 		audioSource = this.GetComponent<AudioSource>();
 
 		//Initialize variables;
