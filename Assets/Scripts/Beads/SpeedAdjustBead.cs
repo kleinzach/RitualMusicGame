@@ -4,11 +4,11 @@ using System;
 
 public class SpeedAdjustBead : Bead {
 
-    public float speedAdjust = 2f;
+    public float speedAdjust = .1f;
 
     public override void OnBeat()
     {
-        ring.speed *= speedAdjust;
+        MusicManager.singleton.speed += speedAdjust;
     }
 
     public override void OnHit(float accuracy)

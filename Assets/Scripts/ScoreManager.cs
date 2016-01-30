@@ -7,20 +7,34 @@ public class ScoreManager : MonoBehaviour {
 
     public static ScoreManager singleton;
 
+    float _combo;
+    public float Combo
+    {
+        get { return _combo; }
+        set {
+            _combo = value;
+            if(ComboText)
+                ComboText.text = Combo + "";
+        }
+    }
+
     float _score;
-    public float score
+    public float Score
     {
         get { return _score; }
-        set {
+        set
+        {
             _score = value;
-            if(ComboText)
-                ComboText.text = score + "";
+            if (ScoreText)
+                ScoreText.text = Score + "";
         }
     }
 
     public float accuracyCutoff;
 
     public Text ComboText;
+    public Text ScoreText;
+
     public AudioMixer mixer;
     public AudioMixerSnapshot snap1;
     public int scoreBreak1 = 10;
@@ -32,61 +46,69 @@ public class ScoreManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        score = 0;
+        Combo = 0;
         singleton = this;
 	}
 	
 	// Update is called once per frame
 	void Update () {
         float l1 = 1, l2 = 0, l3 = 0, l4 = 0;
-        if(0 < score && score < scoreBreak1)
+        if(0 < Combo && Combo < scoreBreak1)
         {
-            l1 = Mathf.Lerp(1,0, Mathf.InverseLerp(0, scoreBreak1, score));
-            l2 = Mathf.Lerp(0,1, Mathf.InverseLerp(0, scoreBreak1, score));
+            l1 = Mathf.Lerp(1,0, Mathf.InverseLerp(0, scoreBreak1, Combo));
+            l2 = Mathf.Lerp(0,1, Mathf.InverseLerp(0, scoreBreak1, Combo));
             l3 = 0;
             l4 = 0;
         }
-        if (scoreBreak1 <= score && score < scoreBreak2)
+        if (scoreBreak1 <= Combo && Combo < scoreBreak2)
         {
             l1 = 0;
-            l2 = Mathf.Lerp(1, 0, Mathf.InverseLerp(scoreBreak1, scoreBreak2, score));
-            l3 = Mathf.Lerp(0, 1, Mathf.InverseLerp(scoreBreak1, scoreBreak2, score));
+            l2 = Mathf.Lerp(1, 0, Mathf.InverseLerp(scoreBreak1, scoreBreak2, Combo));
+            l3 = Mathf.Lerp(0, 1, Mathf.InverseLerp(scoreBreak1, scoreBreak2, Combo));
             l4 = 0;
         }
 
-        if (scoreBreak2 <= score && score < scoreBreak3)
+        if (scoreBreak2 <= Combo && Combo < scoreBreak3)
         {
             l1 = 0;
             l2 = 0;
-            l3 = Mathf.Lerp(1, 0, Mathf.InverseLerp(scoreBreak2, scoreBreak3, score));
-            l4 = Mathf.Lerp(0, 1, Mathf.InverseLerp(scoreBreak2, scoreBreak3, score));
+            l3 = Mathf.Lerp(1, 0, Mathf.InverseLerp(scoreBreak2, scoreBreak3, Combo));
+            l4 = Mathf.Lerp(0, 1, Mathf.InverseLerp(scoreBreak2, scoreBreak3, Combo));
 
         }
-        if(score >= scoreBreak3)
+        if(Combo >= scoreBreak3)
         {
             l1 = 0; l2 = 0; l3 = 0; l4 = 1;
         }
 
         mixer.TransitionToSnapshots(new AudioMixerSnapshot[] { snap1, snap2, snap3, snap4 }, new float[] { l1,l2,l3,l4 }, .1f);
-	}
+
+        if(ScoreText)
+            ScoreText.transform.localScale = Vector3.Lerp(ScoreText.transform.localScale, Vector3.one, Time.deltaTime * 10f);
+        if(ComboText)
+            ComboText.transform.localScale = Vector3.Lerp(ComboText.transform.localScale, Vector3.one, Time.deltaTime * 10f);
+    }
 
     public static void ScoreBead(Bead b, float accuracy)
     {
         if(accuracy > singleton.accuracyCutoff)
         {
-            singleton.score++;
-            if (singleton.score % 5 == 0)
+            singleton.Combo++;
+            singleton.Score += singleton.Combo;
+            singleton.ComboText.transform.localScale = Vector3.one * .5f;
+            if (singleton.Combo % 5 == 0)
             {
                 b.ring.addBead();
             }
         }
         else
         {
-            singleton.score = 0f;
+            singleton.Combo = 0f;
         }
     }
     public static void Miss()
     {
-        singleton.score = 0f;
+        MainVisualizer.Miss();
+        singleton.Combo = 0f;
     }
 }

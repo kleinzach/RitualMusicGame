@@ -28,7 +28,8 @@ public abstract class Bead : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         useTimer -= Time.deltaTime;
-        rend.color = Color.Lerp(rend.color, Color.gray, 1f * Time.deltaTime);
+        if(rend)
+            rend.color = Color.Lerp(rend.color, Color.gray, 1f * Time.deltaTime);
 	}
 
     public abstract void OnHit(float accuracy);

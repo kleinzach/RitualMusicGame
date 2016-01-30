@@ -9,6 +9,8 @@ using UnityEngine.Audio;
 /// </summary>
 public class MusicManager : MonoBehaviour {
 
+    public static MusicManager singleton;
+
 	//Beats per minute should match the music
 	public float BeatsPerMinute = 130.0f;
 
@@ -27,8 +29,10 @@ public class MusicManager : MonoBehaviour {
 	//Images to flash on a beat
 	public Image[] images;
 
-	//Music
-	private AudioSource audioSource;
+	//Music sources
+	public AudioSource audioSource;
+
+    public AudioSource[] additiveMusic;
 
 	//Seconds per beat.  Set through BeatsPerMinute
 	private float secondsPerBeat;
@@ -42,9 +46,25 @@ public class MusicManager : MonoBehaviour {
 	//AudioSourceTotalTime in the last frame;
 	private float lastAudioSourceTotalTime;
 
+    float _speed = 1f;
+    public float speed
+    {
+        get { return _speed; }
+        set { _speed = value;
+        audioSource.pitch = value;
+            foreach(AudioSource a in additiveMusic)
+            {
+                a.pitch = value;
+            }
+        }
+    }
+
 	// Use this for initialization
 	void Start () {
+        singleton = this;
 		audioSource = this.GetComponent<AudioSource>();
+
+        audioSource.pitch = 1f;
 
 		//Initialize variables;
 		float beatsPerSecond = BeatsPerMinute / 60.0f;
@@ -109,6 +129,15 @@ public class MusicManager : MonoBehaviour {
 
 		lastAudioSourceTime = audioSourceTime;
 		lastAudioSourceTotalTime = AudioSourceTotalTime;
+
+        if (Input.GetKeyDown(KeyCode.KeypadPlus))
+        {
+            speed += .1f;
+        }
+        if (Input.GetKeyDown(KeyCode.KeypadMinus))
+        {
+            speed -= .1f;
+        }
 	}
 
     //[HideInInspector]
