@@ -26,13 +26,17 @@ public class BeatRing : MonoBehaviour {
     //How close to accurate a button press would be on this frame.
     public float frameAccuracy = 0;
 
-    /// <summary>
-    /// Initialization by:
-    ///     Setting bead starting positions
-    /// </summary>
+	//The scene's MusicManager.  Will provides its own deltaTime and IsBeat
+	private MusicManager musicManager;
+
+	/// <summary>
+	/// Initialization by:
+	///     Setting bead starting positions
+	/// </summary>
 	void Start () {
         rend = GetComponent<Renderer>();
         RecalculateBeadPositions();
+		musicManager = GameObject.Find("MusicManager").GetComponent<MusicManager>();
 	}
 
     bool beadAlreadyHit;
@@ -44,7 +48,7 @@ public class BeatRing : MonoBehaviour {
     /// </summary>
 	void Update () {
         //Increment the local time by the current speed
-        time += speed * Time.deltaTime;
+        time += speed * musicManager.DeltaTime;
 
         transform.rotation = Quaternion.Euler(0, 0, (360/beadList.Count) * time);
         
