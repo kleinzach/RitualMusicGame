@@ -9,7 +9,8 @@ public enum BeadEnum
 	Red,
 	Green,
 	Blue,
-	Yellow
+	Yellow,
+	Reverse
 }
 
 /// <summary>
@@ -41,6 +42,12 @@ public class BeatRing : MonoBehaviour {
 	public GameObject BlueBeadPrefab;
 	public GameObject YellowBeadPrefab;
 	public GameObject GreenBeadPrefab;
+	public GameObject ReverseBeadPrefab;
+
+	//Reverse on next beat
+	public bool NeedsReversing;
+
+	public GameObject CurrentIndicator;
 
     //A list of all beads around this ring, blank spaces representing no input required.
     private List<Bead> beadList;
@@ -48,11 +55,14 @@ public class BeatRing : MonoBehaviour {
 	//The scene's MusicManager.  Will provides its own deltaTime and IsBeat
 	private MusicManager musicManager;
 
+	private Vector3 targetPos;
+	
 	/// <summary>
 	/// Initialization by:
 	///     Setting bead starting positions
 	/// </summary>
 	void Start () {
+		targetPos = new Vector3(this.transform.localScale.y / 2.0f, 0.0f, this.transform.position.z);
 
 		//Build beadList
 		beadList = new List<Bead>();
@@ -79,6 +89,10 @@ public class BeatRing : MonoBehaviour {
 					GameObject yellowGo = GameObject.Instantiate(YellowBeadPrefab);
 					beadList.Add(yellowGo.GetComponent<Bead>());
 					break;
+				case BeadEnum.Reverse:
+					GameObject reverseGo = GameObject.Instantiate(ReverseBeadPrefab);
+					beadList.Add(reverseGo.GetComponent<Bead>());
+					break;
 				default:
 					break;
 			}
@@ -91,46 +105,97 @@ public class BeatRing : MonoBehaviour {
 
     internal void addBead()
     {
-        GameObject redGo = GameObject.Instantiate(RedBeadPrefab);
-        beadList.Add(redGo.GetComponent<Bead>());
+        //GameObject redGo = GameObject.Instantiate(RedBeadPrefab);
+        //beadList.Add(redGo.GetComponent<Bead>());
     }
 
     bool beadAlreadyHit;
     bool pastCenter;
-    int lastBead;
-	
+	int lastBead;
+
 	/// <summary>
     /// Once per frame:
     ///     Rotate to the correct angle.
     /// </summary>
 	void Update () {
+		if (musicManager.IsBeat)
+		{
+			if (NeedsReversing)
+			{
+				speed = -speed;
+				NeedsReversing = false;
+			}
+		}
+
         //Increment the local time by the current speed
         time += speed * musicManager.DeltaTime;
 
         transform.rotation = Quaternion.Euler(0, 0, (360/beadList.Count) * (time));
-        
-        //Calculate how close to the beat this frame is.
-        frameAccuracy = Mathf.Abs(time % 1);
-        
-        if(frameAccuracy < .5f)
-        {
-            pastCenter = false;
-            currentBeadIndex = (int)(time) % beadList.Count;
-        }
-        else
-        {
-            if (!pastCenter && currentBead && .5f - frameAccuracy < .1f && lastBead == currentBeadIndex)
-            {
-                currentBead.OnBeat();
-                rend.material.color = Color.black;
-            }
-            pastCenter = true;
-            currentBeadIndex = (int)(time+1) % beadList.Count;
-        }
 
-        currentBead = beadList[currentBeadIndex];
-        
-        frameAccuracy = 2*Mathf.Abs(.5f - frameAccuracy);
+		//Calculate how close to the beat this frame is.
+		frameAccuracy = musicManager.Accuracy;// Mathf.Abs(time % 1);
+
+
+		//Set Next Bead////////////////////////////////////////////////////////////////////////////////////////
+		Bead nextBead;
+		int nextBeadIndex = 0;
+
+		if (!musicManager.IsBeat)
+		{
+			if (speed > 0)
+				nextBeadIndex = (int)(time + 1) % beadList.Count;
+			else
+				nextBeadIndex = (int)(time) % beadList.Count;
+		}
+
+		foreach (Bead b in beadList)
+		{
+			if (b)
+				b.IsNext = false;
+		}
+
+		nextBead = beadList[nextBeadIndex];
+		if (nextBead)
+			nextBead.IsNext = true;
+
+		nextBead = beadList[nextBeadIndex];
+
+		if (nextBead)
+		{
+			if (nextBead.GetType() == typeof(ReverseBead))
+			{
+				Vector3 targetPosNoZ = new Vector3(targetPos.x, targetPos.y, nextBead.transform.position.z);
+				if (Mathf.Abs(Vector3.Distance(nextBead.transform.position, targetPosNoZ)) < 0.3f)
+				{
+					this.NeedsReversing = true;
+				}
+			}
+		}
+
+		//End Set Next Bead////////////////////////////////////////////////////////////////////////////////////////////
+
+		//Set Current Bead/////////////////////////////////////////////////////////////////////////////////////////////
+		float closestDistance = 99999.9f;
+		for(int i = 0; i< beadList.Count; i++)
+		{
+			if (beadList[i])
+			{
+				if (Mathf.Abs(Vector3.Distance(beadList[i].transform.position, targetPos)) < closestDistance)
+				{
+					closestDistance = Mathf.Abs(Vector3.Distance(beadList[i].transform.position, targetPos));
+					currentBead = beadList[i];
+					currentBeadIndex = i;
+				}
+			}
+		}
+
+		if (currentBead)
+			CurrentIndicator.transform.position = currentBead.transform.position + new Vector3(0.0f, 0.0f, -10.0f);
+		else
+			CurrentIndicator.transform.position = new Vector3(100, 100, 1000);
+		//End Set Current Bead///////////////////////////////////////////////////////////////////////////////////////////
+
+		frameAccuracy = 2*Mathf.Abs(.5f - frameAccuracy);
 
         //Reposition the beads.
         RecalculateBeadPositions();
@@ -138,8 +203,8 @@ public class BeatRing : MonoBehaviour {
         //Debug code to adjust color based on the beat
         rend.material.color = Color.Lerp(rend.material.color, Color.white, Time.deltaTime * 10f);
         rend.material.color = frameAccuracy > .9f ? Color.black : rend.material.color;
-        lastBead = currentBeadIndex;
-    }
+		lastBead = currentBeadIndex;
+	}
 
     /// <summary>
     /// Places the beads around the circle,
