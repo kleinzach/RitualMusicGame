@@ -11,6 +11,8 @@ public class BeatRing : MonoBehaviour {
 
     Renderer rend;
 
+    float time;
+
     //A speed scalar for the spin rate of this ring.
     public float speed;
 
@@ -37,17 +39,25 @@ public class BeatRing : MonoBehaviour {
     ///     Rotate to the correct angle.
     /// </summary>
 	void Update () {
-        transform.rotation = Quaternion.Euler(0, 0, (360/beadList.Count) * speed * (Time.time));
-        currentBead = (int)(Time.time * speed + 1) % beadList.Count;
+        //Increment the local time by the current speed
+        time += speed * Time.deltaTime;
 
-        frameAccuracy = (Time.time * speed) % 1;
+        transform.rotation = Quaternion.Euler(0, 0, (360/beadList.Count) * time);
+        
+        //Calculate how close to the beat this frame is.
+        frameAccuracy = Mathf.Abs(time % 1);
+
+        currentBead = frameAccuracy < .5f ? (int)(time) % beadList.Count : (int)(time + 1) % beadList.Count;
+
+        frameAccuracy = 2*Mathf.Abs(.5f - frameAccuracy);
 
         //Reposition the beads.
         RecalculateBeadPositions();
 
         //Debug code to adjust color based on the beat
-        rend.material.color = frameAccuracy < .1f ? new Color(1,1,1) : new Color(.5f,.5f,.5f);
-	}
+        rend.material.color = frameAccuracy > .9f ? new Color(1, 1, 1) : new Color(.5f, .5f, .5f);
+
+    }
 
     /// <summary>
     /// Places the beads around the circle,
@@ -58,6 +68,7 @@ public class BeatRing : MonoBehaviour {
         //For each bead...
         for (int i = 0; i < beadList.Count; i++)
         {
+            //The bead (or null) at this position in the list.
             Bead b = beadList[i];
 
             if (b)
