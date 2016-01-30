@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Bead : MonoBehaviour {
+public abstract class Bead : MonoBehaviour {
 
     public AudioClip hitClip;
 
@@ -20,13 +20,7 @@ public class Bead : MonoBehaviour {
 	
 	}
 
-    public void OnHit(float accuracy)
-    {
-
-    }
-    public void OnMiss()
-    {
-
-    }
-
+    public abstract void OnHit(float accuracy);
+    public abstract void OnMiss();
+    public abstract void OnCenter();
 }

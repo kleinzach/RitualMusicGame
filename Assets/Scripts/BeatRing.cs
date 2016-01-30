@@ -11,7 +11,7 @@ public class BeatRing : MonoBehaviour {
 
     Renderer rend;
 
-    float time;
+    float time= 1000;
 
     //A speed scalar for the spin rate of this ring.
     public float speed;
@@ -36,6 +36,7 @@ public class BeatRing : MonoBehaviour {
 	}
 
     bool beadAlreadyHit;
+    bool pastCenter;
 	
 	/// <summary>
     /// Once per frame:
@@ -50,7 +51,21 @@ public class BeatRing : MonoBehaviour {
         //Calculate how close to the beat this frame is.
         frameAccuracy = Mathf.Abs(time % 1);
 
-        currentBeadIndex = frameAccuracy < .5f ? (int)(time) % beadList.Count : (int)(time + 1) % beadList.Count;
+        if(frameAccuracy < .5f)
+        {
+            pastCenter = false;
+            currentBeadIndex = (int)(time) % beadList.Count;
+        }
+        else
+        {
+            if (!pastCenter && currentBead)
+            {
+                Debug.Log("Center");
+                currentBead.OnCenter();
+            }
+            currentBeadIndex = (int)(time + Mathf.Sign(speed)) % beadList.Count;
+        }
+
         currentBead = beadList[currentBeadIndex];
         
         frameAccuracy = 2*Mathf.Abs(.5f - frameAccuracy);
@@ -77,6 +92,8 @@ public class BeatRing : MonoBehaviour {
 
             if (b)
             {
+                b.ring = this;
+
                 //Calculate the angle around the circle,
                 float lamda = -i * 2 * Mathf.PI / beadList.Count;
 
