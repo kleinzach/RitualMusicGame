@@ -48,7 +48,7 @@ public class InputManager : MonoBehaviour {
         foreach (KeyCode key in keyPressedLeftList)
         {
             ScoreManager.Miss();
-            Debug.Log("Fail! " + Time.time);
+            //Debug.Log("Fail! " + Time.time);
         }
 	}
 }
