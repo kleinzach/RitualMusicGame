@@ -42,4 +42,9 @@ public class MainVisualizer : MonoBehaviour {
         Debug.Log("MISS " + ScoreManager.singleton.Combo);
         singleton.source.PlayOneShot(singleton.missSound,ScoreManager.singleton.Combo / 100f);
     }
+
+    public static void PlaySound(AudioClip clip, float volume)
+    {
+        singleton.source.PlayOneShot(clip,volume);
+    }
 }

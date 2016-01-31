@@ -52,30 +52,30 @@ public class ScoreManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         float l1 = 1, l2 = 0, l3 = 0, l4 = 0;
-        if(0 < Score && Score < scoreBreak1)
+        if(0 < Combo && Combo < scoreBreak1)
         {
-            l1 = Mathf.Lerp(1,0, Mathf.InverseLerp(0, scoreBreak1, Score));
-            l2 = Mathf.Lerp(0,1, Mathf.InverseLerp(0, scoreBreak1, Score));
+            l1 = Mathf.Lerp(1,0, Mathf.InverseLerp(0, scoreBreak1, Combo));
+            l2 = Mathf.Lerp(0,1, Mathf.InverseLerp(0, scoreBreak1, Combo));
             l3 = 0;
             l4 = 0;
         }
-        if (scoreBreak1 <= Score && Score < scoreBreak2)
+        if (scoreBreak1 <= Combo && Combo < scoreBreak2)
         {
             l1 = 0;
-            l2 = Mathf.Lerp(1, 0, Mathf.InverseLerp(scoreBreak1, scoreBreak2, Score));
-            l3 = Mathf.Lerp(0, 1, Mathf.InverseLerp(scoreBreak1, scoreBreak2, Score));
+            l2 = Mathf.Lerp(1, 0, Mathf.InverseLerp(scoreBreak1, scoreBreak2, Combo));
+            l3 = Mathf.Lerp(0, 1, Mathf.InverseLerp(scoreBreak1, scoreBreak2, Combo));
             l4 = 0;
         }
 
-        if (scoreBreak2 <= Score && Score < scoreBreak3)
+        if (scoreBreak2 <= Combo && Combo < scoreBreak3)
         {
             l1 = 0;
             l2 = 0;
-            l3 = Mathf.Lerp(1, 0, Mathf.InverseLerp(scoreBreak2, scoreBreak3, Score));
-            l4 = Mathf.Lerp(0, 1, Mathf.InverseLerp(scoreBreak2, scoreBreak3, Score));
+            l3 = Mathf.Lerp(1, 0, Mathf.InverseLerp(scoreBreak2, scoreBreak3, Combo));
+            l4 = Mathf.Lerp(0, 1, Mathf.InverseLerp(scoreBreak2, scoreBreak3, Combo));
 
         }
-        if(Score >= scoreBreak3)
+        if(Combo >= scoreBreak3)
         {
             l1 = 0; l2 = 0; l3 = 0; l4 = 1;
         }

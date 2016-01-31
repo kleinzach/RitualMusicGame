@@ -96,7 +96,8 @@ public class MusicManager : MonoBehaviour {
 		//Dim Strobes
 		for (int i = 0; i < images.Length; i++)
 		{
-			images[i].color = new Color(images[i].color.r, images[i].color.g, images[i].color.b, Mathf.Clamp(images[i].color.a - 0.1f, 0.0f, 1.0f));
+            if(images[i])
+			    images[i].color = new Color(images[i].color.r, images[i].color.g, images[i].color.b, Mathf.Clamp(images[i].color.a - 0.1f, 0.0f, 1.0f));
 		}
 
 		//Play a beat if needed

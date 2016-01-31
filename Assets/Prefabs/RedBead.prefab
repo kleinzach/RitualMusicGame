@@ -9,7 +9,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 479440}
   - 114: {fileID: 11470540}
-  - 82: {fileID: 8223834}
   m_Layer: 0
   m_Name: RedBead
   m_TagString: Untagged
@@ -58,80 +57,6 @@ Transform:
   - {fileID: 435004}
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!82 &8223834
-AudioSource:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 124396}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  Priority: 2
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
 --- !u!114 &11470540
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -145,12 +70,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitClip: {fileID: 0}
   ring: {fileID: 0}
-  key: 100
+  key: 107
   useTimer: 0
   clip: {fileID: 8300000, guid: 2f535030cf826384a814ec066a5d9d23, type: 3}
-  hitColor: {r: 0, g: 0, b: 0, a: 0}
+  hitColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   IsNext: 0
   targetScale: {x: 1, y: 1, z: 1}
+  health: 3
 --- !u!212 &21296180
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -202,7 +128,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: key
-      value: 100
+      value: 107
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: panLevelCustomCurve.m_RotationOrder
@@ -219,6 +145,27 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: Priority
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24325740, guid: 37e6f0fe0f572e447b8fb9c7bfeef504,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: hitColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: hitColor.r
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: hitColor.g
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: hitColor.b
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

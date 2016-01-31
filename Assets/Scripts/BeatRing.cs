@@ -161,7 +161,7 @@ public class BeatRing : MonoBehaviour
             ReverseBeadPrefab,
             SpeedUpBeadPrefab
         };
-        return objs[Random.Range(0, objs.Length - 1)];
+        return objs[Random.Range(0, objs.Length)];
     }
 
     int needNewBead = -1;
@@ -244,8 +244,6 @@ public class BeatRing : MonoBehaviour
 
 		frameAccuracy = 2 * Mathf.Abs(.5f - frameAccuracy);
 
-		//Reposition the beads.
-		RecalculateBeadPositions();
 
 		//Debug code to adjust color based on the beat
 		rend.material.color = Color.Lerp(rend.material.color, Color.white, Time.deltaTime * 1f);
@@ -255,7 +253,10 @@ public class BeatRing : MonoBehaviour
         {
             tryAddBead();
         }
-	}
+
+        //Reposition the beads.
+        RecalculateBeadPositions();
+    }
     int lastBead = 0;
 
     Vector3 calculateBeadPosition(int i)

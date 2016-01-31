@@ -33,8 +33,7 @@ public abstract class Bead : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         useTimer -= Time.deltaTime;
-		if (rend)
-			rend.color = Color.Lerp(rend.material.color, Color.white, 10*Time.deltaTime);
+        rend.color = Color.Lerp(rend.color, Color.white, 10*Time.deltaTime);
         targetScale = Vector3.Lerp(targetScale, Vector3.one, Time.deltaTime);
         if(health <= 0)
         {

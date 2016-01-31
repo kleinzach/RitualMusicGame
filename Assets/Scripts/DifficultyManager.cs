@@ -10,14 +10,19 @@ public class DifficultyManager : MonoBehaviour {
 
     public static bool readyForAnother = false;
 
+    public float startSpeed;
+    public float speedPerSecond;
+
 	// Use this for initialization
 	void Start () {
-	
+        nextBead = beadInterval;
+        MusicManager.singleton.Speed = startSpeed;
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
+        MusicManager.singleton.Speed = startSpeed + Time.time * speedPerSecond;
         if (readyForAnother)
         {
             nextBead = beadInterval;
@@ -26,7 +31,7 @@ public class DifficultyManager : MonoBehaviour {
         nextBead -= Time.deltaTime;
         if (nextBead < 0f)
         {
-            rings[Random.Range(0,rings.Count-1)].addBead();
+            rings[Random.Range(0,rings.Count)].addBead();
             nextBead = 1000f;
         }
 	}
