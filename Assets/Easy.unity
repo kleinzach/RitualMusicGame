@@ -149,11 +149,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 452210, guid: b15854ef5211944429fc3142778437f9, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 4.39
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 452210, guid: b15854ef5211944429fc3142778437f9, type: 2}
       propertyPath: m_LocalRotation.x
-      value: -0.7071068
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 452210, guid: b15854ef5211944429fc3142778437f9, type: 2}
       propertyPath: m_LocalRotation.y
@@ -165,7 +165,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 452210, guid: b15854ef5211944429fc3142778437f9, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 452210, guid: b15854ef5211944429fc3142778437f9, type: 2}
       propertyPath: m_RootOrder
@@ -458,7 +458,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0175c169704c89d4db38bf240a1dce63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  accuracyCutoff: 0.95
+  accuracyCutoff: 0.1
   ComboText: {fileID: 1593761889}
   ScoreText: {fileID: 738077731}
   mixer: {fileID: 24100000, guid: 37e6f0fe0f572e447b8fb9c7bfeef504, type: 2}

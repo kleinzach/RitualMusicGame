@@ -23,7 +23,6 @@ public class MainVisualizer : MonoBehaviour {
 	void Update () {
         timer.fillAmount = 1 - ((float)(Time.timeSinceLevelLoad)) / ((float)(DifficultyManager.singleton.timeLimit));
         timer.color = Color.Lerp(Color.red, Color.green, timer.fillAmount);
-        Debug.Log(timer.fillAmount);
 	}
 
     public static void Hit(float accuracy)
