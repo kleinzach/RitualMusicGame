@@ -65,6 +65,8 @@ public class BeatRing : MonoBehaviour
 	/// </summary>
 	void Start()
 	{
+		NeedsReversing = false;
+
 		targetPos = new Vector3(this.transform.localScale.y / 2.0f, 0.0f, this.transform.position.z);
 
 		//Build beadList
@@ -172,7 +174,7 @@ public class BeatRing : MonoBehaviour
 	{
 		if (musicManager.IsBeat)
 		{
-			if (NeedsReversing)
+			if ((NeedsReversing) && (IsReverseNearby()))
 			{
 				speed = -speed;
 				NeedsReversing = false;
@@ -310,5 +312,39 @@ public class BeatRing : MonoBehaviour
 	public void Score()
 	{
 		currentBead.OnHit(frameAccuracy);
+	}
+
+	private bool IsReverseNearby()
+	{
+		//I know this is ugly and contrary to the design, but it seems to work and fix the reverse bug
+
+		Bead nearestBead = null;
+
+		float closestDistance = 99999.9f;
+		for (int i = 0; i < beadList.Count; i++)
+		{
+			Vector3 pos = transform.TransformPoint(calculateBeadPosition(i));
+			if (Mathf.Abs(Vector3.Distance(pos, targetPos)) < closestDistance)
+			{
+				transform.TransformPoint(calculateBeadPosition(i));
+				closestDistance = Mathf.Abs(Vector3.Distance(pos, targetPos));
+				nearestBead = beadList[i];
+			}
+		}
+
+		if (nearestBead)
+		{
+			Vector3 targetPosNoZ = new Vector3(targetPos.x, targetPos.y, nearestBead.transform.position.z);
+			if (Mathf.Abs(Vector3.Distance(nearestBead.transform.position, targetPosNoZ)) < 0.3f)
+			{
+				if (nearestBead.GetType() == typeof(ReverseBead))
+				{
+					((ReverseBead)nearestBead).DecreaseHealth();
+					return true;
+				}
+			}
+		}
+
+		return false;
 	}
 }

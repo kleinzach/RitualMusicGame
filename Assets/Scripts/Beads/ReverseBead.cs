@@ -19,11 +19,16 @@ public class ReverseBead : Bead {
 
     public override void OnBeat()
     {
-        if ((Time.time - useTimer) > .1f)
-        {
-            ring.NeedsReversing = true;
-            useTimer = Time.time;
-            health--;
-        }
+		if ((Time.time - useTimer) > .1f)
+		{
+			ring.NeedsReversing = true;
+			useTimer = Time.time;
+		}		
     }
+
+	public void DecreaseHealth()
+	{
+		//I know this is ugly and contrary to the design, but it seems to work and fix the reverse bug
+		health--;
+	}
 }
