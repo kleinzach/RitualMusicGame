@@ -152,16 +152,7 @@ public class BeatRing : MonoBehaviour
 
     private GameObject GetRandomBeadType()
     {
-        GameObject[] objs = new GameObject[]
-        {
-            RedBeadPrefab,
-            BlueBeadPrefab,
-            YellowBeadPrefab,
-            GreenBeadPrefab,
-            ReverseBeadPrefab,
-            SpeedUpBeadPrefab
-        };
-        return objs[Random.Range(0, objs.Length)];
+        return DifficultyManager.generateRandomBead().gameObject;
     }
 
     int needNewBead = -1;
