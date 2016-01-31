@@ -6,6 +6,7 @@ public class DifficultyManager : MonoBehaviour {
     public List<BeatRing> rings;
 
     float nextBead = 10f;
+    public float beadInterval = 10f;
 
     public static bool readyForAnother = false;
 
@@ -19,13 +20,13 @@ public class DifficultyManager : MonoBehaviour {
     {
         if (readyForAnother)
         {
-            nextBead = 30f;
+            nextBead = beadInterval;
             readyForAnother = false;
         }
         nextBead -= Time.deltaTime;
         if (nextBead < 0f)
         {
-            rings[0].addBead();
+            rings[Random.Range(0,rings.Count-1)].addBead();
             nextBead = 1000f;
         }
 	}
