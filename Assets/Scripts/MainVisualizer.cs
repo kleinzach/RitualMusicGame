@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class MainVisualizer : MonoBehaviour {
@@ -11,6 +12,8 @@ public class MainVisualizer : MonoBehaviour {
     public AudioSource source;
     public AudioClip missSound;
 
+    public Image timer;
+
     // Use this for initialization
     void Start () {
         singleton = this;
@@ -18,7 +21,9 @@ public class MainVisualizer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+        timer.fillAmount = 1 - ((float)(Time.timeSinceLevelLoad)) / ((float)(DifficultyManager.singleton.timeLimit));
+        timer.color = Color.Lerp(Color.red, Color.green, timer.fillAmount);
+        Debug.Log(timer.fillAmount);
 	}
 
     public static void Hit(float accuracy)

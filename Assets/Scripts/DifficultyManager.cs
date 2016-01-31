@@ -50,8 +50,7 @@ public class DifficultyManager : MonoBehaviour {
             rings[Random.Range(0,rings.Count)].addBead();
             nextBead = longBeadInterval;
         }
-
-        Debug.Log(Time.timeSinceLevelLoad);
+        
         if(Time.timeSinceLevelLoad >= timeLimit)
         {
             EndGame();
