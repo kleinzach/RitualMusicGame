@@ -69,12 +69,12 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.97
   m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
-  Priority: 128
+  Priority: 3
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -147,7 +147,10 @@ MonoBehaviour:
   ring: {fileID: 0}
   key: 102
   useTimer: 0
-  clip: {fileID: 8300000, guid: 178d38d253f004a4db69ba1808cae408, type: 3}
+  clip: {fileID: 8300000, guid: 04f2cd27906308a4c8e00e17401dff8f, type: 3}
+  hitColor: {r: 0, g: 0, b: 0, a: 0}
+  IsNext: 0
+  targetScale: {x: 1, y: 1, z: 1}
 --- !u!212 &21285844
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -212,7 +215,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: clip
       value: 
-      objectReference: {fileID: 8300000, guid: 178d38d253f004a4db69ba1808cae408, type: 3}
+      objectReference: {fileID: 8300000, guid: 04f2cd27906308a4c8e00e17401dff8f, type: 3}
     - target: {fileID: 0}
       propertyPath: looping
       value: 0
@@ -220,6 +223,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: playOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Priority
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Volume
+      value: 0.97
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
