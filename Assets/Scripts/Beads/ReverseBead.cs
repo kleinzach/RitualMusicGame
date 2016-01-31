@@ -3,8 +3,9 @@ using System.Collections;
 using System;
 
 public class ReverseBead : Bead {
-    
-    
+
+	private bool hasInitiatedReverse = false;
+
     public override void OnHit(float accuracy)
     {
         useTimer = Time.time;
@@ -21,8 +22,13 @@ public class ReverseBead : Bead {
     {
 		if ((Time.time - useTimer) > .1f)
 		{
-			ring.NeedsReversing = true;
-			useTimer = Time.time;
+			if (!hasInitiatedReverse)
+			{
+				ring.NeedsReversing = true;
+				useTimer = Time.time;
+				hasInitiatedReverse = true;
+				health--;
+			}
 		}		
     }
 

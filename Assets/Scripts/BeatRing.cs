@@ -167,7 +167,7 @@ public class BeatRing : MonoBehaviour
 	{
 		if (musicManager.IsBeat)
 		{
-			if ((NeedsReversing) && (IsReverseNearby()))
+			if ((NeedsReversing))
 			{
 				speed = -speed;
 				NeedsReversing = false;
