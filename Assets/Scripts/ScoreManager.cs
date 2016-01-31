@@ -89,10 +89,6 @@ public class ScoreManager : MonoBehaviour {
         {
             singleton.Combo++;
             singleton.Score += singleton.Combo;
-            if (singleton.Score % 5 == 0)
-            {
-                b.ring.addBead();
-            }
         }
         else
         {
