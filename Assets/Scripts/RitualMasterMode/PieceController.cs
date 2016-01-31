@@ -63,15 +63,17 @@ public class PieceController : MonoBehaviour
 		for(int beatRingIndex = 0; beatRingIndex < ritualMasterModeController.BeatRings.Count; beatRingIndex++)
 		{
 			for(int beatIndex = 0; beatIndex < ritualMasterModeController.BeatRings[beatRingIndex].beadList.Count; beatIndex++)
-			//foreach(Bead bead in ritualMasterModeController.BeatRings[beatRingIndex].beadList)
 			{
-				Bead bead = ritualMasterModeController.BeatRings[beatRingIndex].beadList[beatIndex];
-				if (Mathf.Abs(Vector2.Distance(bead.transform.position, currentPos)) < distance)
+				if ((ritualMasterModeController.BeatRings[beatRingIndex]) && (ritualMasterModeController.BeatRings[beatRingIndex].beadList[beatIndex]))
 				{
-					distance = Mathf.Abs(Vector2.Distance(bead.transform.position, currentPos));
-					currentBead = bead;
-					currentBeadIndex = beatIndex;
-					currentBeadBeatRingIndex = beatRingIndex;
+					Bead bead = ritualMasterModeController.BeatRings[beatRingIndex].beadList[beatIndex];
+					if (Mathf.Abs(Vector2.Distance(bead.transform.position, currentPos)) < distance)
+					{
+						distance = Mathf.Abs(Vector2.Distance(bead.transform.position, currentPos));
+						currentBead = bead;
+						currentBeadIndex = beatIndex;
+						currentBeadBeatRingIndex = beatRingIndex;
+					}
 				}
 			}
 		}
