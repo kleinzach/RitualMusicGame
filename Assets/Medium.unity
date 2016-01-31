@@ -470,6 +470,7 @@ MonoBehaviour:
   snap3: {fileID: 24525710, guid: 37e6f0fe0f572e447b8fb9c7bfeef504, type: 2}
   scoreBreak3: 50
   snap4: {fileID: 24592100, guid: 37e6f0fe0f572e447b8fb9c7bfeef504, type: 2}
+  maxCombo: 0
 --- !u!4 &1079867413
 Transform:
   m_ObjectHideFlags: 0
@@ -1015,8 +1016,11 @@ MonoBehaviour:
   - {fileID: 1633678354}
   - {fileID: 1645072480}
   beadInterval: 1
+  longBeadInterval: 100
   startSpeed: 0.75
   speedPerSecond: 0.0025
+  timeLimit: 180
+  difficulty: Medium
   beadPossibilities:
   - bead: {fileID: 11443824, guid: 4cb15a53679392a4fbe3dddc64f28229, type: 2}
     frequency: 0.2
