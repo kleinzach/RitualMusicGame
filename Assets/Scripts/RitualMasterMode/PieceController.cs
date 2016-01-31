@@ -5,15 +5,24 @@ public class PieceController : MonoBehaviour
 {
 	public GameObject Prefab;
 
+	public bool PreventDuplicatesOnRing = false;
+
 	private RitualMasterModeController ritualMasterModeController;
 	private Vector3 offset;
 
 	private Collider2D coll;
 	private Vector3 startPos;
 
+	private System.Type beadType;
+
+	private bool lerpBack;
+
 	// Use this for initialization
 	void Start()
 	{
+		lerpBack = false;
+		beadType = Prefab.GetComponent<Bead>().GetType();
+
 		startPos = this.transform.position;
 		GameObject gameControllerObject = GameObject.Find("RitualMasterModeController");
 		if (gameControllerObject != null)
@@ -31,6 +40,15 @@ public class PieceController : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		if (lerpBack)
+		{
+			this.transform.position = Vector3.Lerp(this.transform.position, startPos, 0.5f);
+			if (Vector2.Distance(this.transform.position, startPos) < 0.1f)
+			{
+				this.transform.position = startPos;
+				lerpBack = false;
+			}
+		}
 	}
 
 
@@ -59,20 +77,41 @@ public class PieceController : MonoBehaviour
 		int currentBeadBeatRingIndex = -1;
 
 		float distance = Mathf.Abs(Vector2.Distance(startPos, currentPos));
+		int similarTypesOnThisRing = 0;
 
 		for(int beatRingIndex = 0; beatRingIndex < ritualMasterModeController.BeatRings.Count; beatRingIndex++)
 		{
-			for(int beatIndex = 0; beatIndex < ritualMasterModeController.BeatRings[beatRingIndex].beadList.Count; beatIndex++)
+			similarTypesOnThisRing = 0;
+			if (PreventDuplicatesOnRing)
 			{
-				if ((ritualMasterModeController.BeatRings[beatRingIndex]) && (ritualMasterModeController.BeatRings[beatRingIndex].beadList[beatIndex]))
+				for (int beatIndex = 0; beatIndex < ritualMasterModeController.BeatRings[beatRingIndex].beadList.Count; beatIndex++)
 				{
-					Bead bead = ritualMasterModeController.BeatRings[beatRingIndex].beadList[beatIndex];
-					if (Mathf.Abs(Vector2.Distance(bead.transform.position, currentPos)) < distance)
+					if ((ritualMasterModeController.BeatRings[beatRingIndex]) && (ritualMasterModeController.BeatRings[beatRingIndex].beadList[beatIndex]))
 					{
-						distance = Mathf.Abs(Vector2.Distance(bead.transform.position, currentPos));
-						currentBead = bead;
-						currentBeadIndex = beatIndex;
-						currentBeadBeatRingIndex = beatRingIndex;
+						Bead bead = ritualMasterModeController.BeatRings[beatRingIndex].beadList[beatIndex];
+						if (bead.GetType() == this.beadType)
+						{
+							similarTypesOnThisRing++;
+							break;
+						}
+					}
+				}
+			}
+
+			if (similarTypesOnThisRing <= 0)
+			{
+				for (int beatIndex = 0; beatIndex < ritualMasterModeController.BeatRings[beatRingIndex].beadList.Count; beatIndex++)
+				{
+					if ((ritualMasterModeController.BeatRings[beatRingIndex]) && (ritualMasterModeController.BeatRings[beatRingIndex].beadList[beatIndex]))
+					{
+						Bead bead = ritualMasterModeController.BeatRings[beatRingIndex].beadList[beatIndex];
+						if (Mathf.Abs(Vector2.Distance(bead.transform.position, currentPos)) < distance)
+						{
+							distance = Mathf.Abs(Vector2.Distance(bead.transform.position, currentPos));
+							currentBead = bead;
+							currentBeadIndex = beatIndex;
+							currentBeadBeatRingIndex = beatRingIndex;
+						}
 					}
 				}
 			}
@@ -88,7 +127,7 @@ public class PieceController : MonoBehaviour
 		}
 		else
 		{
-			this.transform.position = startPos;
+			lerpBack = true;
 		}
 	}
 
