@@ -22,6 +22,8 @@ public class NormalBead : Bead {
 
     public override void OnMiss()
     {
-
+        targetScale = Vector3.one * 1.25f;
+        Debug.Log("Miss");
+        ScoreManager.Miss();
     }
 }

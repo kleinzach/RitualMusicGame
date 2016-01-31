@@ -14,7 +14,6 @@ public class SpeedAdjustBead : Bead {
             ring.speed *= speedAdjust;
             speedAdjust = 1 / speedAdjust;
             useTimer = Time.time;
-            Debug.Log("BEAT");
             health--;
         }
     }

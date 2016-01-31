@@ -166,6 +166,8 @@ public class BeatRing : MonoBehaviour
 
     int needNewBead = -1;
 
+    bool beadHit;
+
 	/// <summary>
 	/// Once per frame:
 	///     Rotate to the correct angle.
@@ -228,6 +230,7 @@ public class BeatRing : MonoBehaviour
 
 		//Set Current Bead/////////////////////////////////////////////////////////////////////////////////////////////
 		float closestDistance = 99999.9f;
+        Bead lastCurrentBead = currentBead;
 		for (int i = 0; i < beadList.Count; i++)
 		{
             Vector3 pos = transform.TransformPoint(calculateBeadPosition(i));
@@ -235,14 +238,26 @@ public class BeatRing : MonoBehaviour
 			{
                 transform.TransformPoint(calculateBeadPosition(i));
 				closestDistance = Mathf.Abs(Vector3.Distance(pos, targetPos));
+
 				currentBead = beadList[i];
 				currentBeadIndex = i;
-			}
+            }
 			
 		}
-		//End Set Current Bead///////////////////////////////////////////////////////////////////////////////////////////
 
-		frameAccuracy = 2 * Mathf.Abs(.5f - frameAccuracy);
+        if(lastCurrentBead != currentBead)
+        {
+            if (!beadHit && nextBead == currentBead)
+            {
+                if (lastCurrentBead != null)
+                    lastCurrentBead.OnMiss();
+            }
+            beadHit = false;
+        }
+
+        //End Set Current Bead///////////////////////////////////////////////////////////////////////////////////////////
+
+        frameAccuracy = 2 * Mathf.Abs(.5f - frameAccuracy);
 
 
 		//Debug code to adjust color based on the beat
@@ -288,7 +303,7 @@ public class BeatRing : MonoBehaviour
 
 				//Set the global scale and rotation to default values.
 				b.transform.parent = null;
-				b.transform.localScale = Vector3.one;
+				b.transform.localScale = b.targetScale;
 				b.transform.localRotation = Quaternion.Euler(Vector3.zero);
 
 				//Reparent and set the position to the edge of the circle at the correct angle.
@@ -312,7 +327,8 @@ public class BeatRing : MonoBehaviour
 
 	public void Score()
 	{
-		currentBead.OnHit(frameAccuracy);
+        beadHit = true;
+        currentBead.OnHit(frameAccuracy);
 	}
 
 	private bool IsReverseNearby()
