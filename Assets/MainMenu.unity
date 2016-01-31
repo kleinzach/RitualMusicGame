@@ -153,21 +153,13 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Credits:
 
-    l
+    Henry Eastman
 
-    l
+    Jeff Mlakar
 
-    l
+    Steve Norris
 
-    l
-
-    l
-
-    l
-
-    l
-
-    aafdafad'
+    Dave M'
 --- !u!222 &140960499
 CanvasRenderer:
   m_ObjectHideFlags: 0
