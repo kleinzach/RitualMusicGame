@@ -17,6 +17,7 @@ public class NormalBead : Bead {
         asource.PlayOneShot(clip,accuracy);
         MainVisualizer.Hit(accuracy);
         rend.color = hitColor;
+        health--;
     }
 
     public override void OnMiss()

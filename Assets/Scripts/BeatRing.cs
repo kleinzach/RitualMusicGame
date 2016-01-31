@@ -127,7 +127,6 @@ public class BeatRing : MonoBehaviour
         if(indices.Count > 0)
         {
             needNewBead = indices[Random.Range(0, indices.Count - 1)];
-            Debug.Log("Need new Bead: " + needNewBead);
             return true;
         }
         else
@@ -142,11 +141,25 @@ public class BeatRing : MonoBehaviour
         int beadPosition = ((int)(currentBeadIndex - (Mathf.Sign(speed) * beadList.Count) / 4f + beadList.Count)) % beadList.Count;
         if (needNewBead == beadPosition)
         {
-            Debug.Log("Added");
-            beadList[needNewBead] = Instantiate<Bead>(RedBeadPrefab.GetComponent<Bead>());
+            GameObject bead = GetRandomBeadType();
+            beadList[needNewBead] = Instantiate<Bead>(bead.GetComponent<Bead>());
             needNewBead = -1;
             DifficultyManager.readyForAnother = true;
         }
+    }
+
+    private GameObject GetRandomBeadType()
+    {
+        GameObject[] objs = new GameObject[]
+        {
+            RedBeadPrefab,
+            BlueBeadPrefab,
+            YellowBeadPrefab,
+            GreenBeadPrefab,
+            ReverseBeadPrefab,
+            SpeedUpBeadPrefab
+        };
+        return objs[Random.Range(0, objs.Length - 1)];
     }
 
     int needNewBead = -1;

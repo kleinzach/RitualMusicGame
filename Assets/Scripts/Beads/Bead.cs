@@ -22,6 +22,8 @@ public abstract class Bead : MonoBehaviour {
 
     public Vector3 targetScale = Vector3.one;
 
+    public int health = 3;
+
 	// Use this for initialization
 	void Start () {
         rend = GetComponentInChildren<SpriteRenderer>();
@@ -34,6 +36,10 @@ public abstract class Bead : MonoBehaviour {
 		if (rend)
 			rend.color = Color.Lerp(rend.material.color, Color.white, 10*Time.deltaTime);
         targetScale = Vector3.Lerp(targetScale, Vector3.one, Time.deltaTime);
+        if(health <= 0)
+        {
+            Destroy(this.gameObject);
+        }
 	}
 
     public abstract void OnHit(float accuracy);

@@ -403,14 +403,14 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 525753540}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 10c9be7e7aa6c844db335519f422e0ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   time: 1000
   speed: 2.1666667
-  beadEnumList: 0100000001000000010000000000000001000000010000000100000000000000
+  beadEnumList: 00000000000000000000000000000000
   currentBeadIndex: 0
   currentBead: {fileID: 0}
   frameAccuracy: 0
@@ -420,7 +420,9 @@ MonoBehaviour:
   GreenBeadPrefab: {fileID: 156932, guid: 840c9d13f66509947bdb78d62782df98, type: 2}
   ReverseBeadPrefab: {fileID: 124254, guid: b0d910f5c47cab34fa9b24b8cda04be6, type: 2}
   SpeedUpBeadPrefab: {fileID: 197088, guid: fc2ef8e676e5c644eaa7d74c5ba1df92, type: 2}
+  MarkerBeadPrefab: {fileID: 0}
   NeedsReversing: 0
+  beadList: []
 --- !u!1 &571535837
 GameObject:
   m_ObjectHideFlags: 0
@@ -2688,7 +2690,9 @@ MonoBehaviour:
   GreenBeadPrefab: {fileID: 156932, guid: 840c9d13f66509947bdb78d62782df98, type: 2}
   ReverseBeadPrefab: {fileID: 124254, guid: b0d910f5c47cab34fa9b24b8cda04be6, type: 2}
   SpeedUpBeadPrefab: {fileID: 197088, guid: fc2ef8e676e5c644eaa7d74c5ba1df92, type: 2}
+  MarkerBeadPrefab: {fileID: 0}
   NeedsReversing: 0
+  beadList: []
 --- !u!1 &1645072475
 GameObject:
   m_ObjectHideFlags: 0
@@ -2771,14 +2775,14 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1645072475}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 10c9be7e7aa6c844db335519f422e0ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   time: 1000
   speed: 1.0833335
-  beadEnumList: 03000000030000000200000006000000
+  beadEnumList: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   currentBeadIndex: 0
   currentBead: {fileID: 0}
   frameAccuracy: 0
@@ -2788,7 +2792,9 @@ MonoBehaviour:
   GreenBeadPrefab: {fileID: 156932, guid: 840c9d13f66509947bdb78d62782df98, type: 2}
   ReverseBeadPrefab: {fileID: 124254, guid: b0d910f5c47cab34fa9b24b8cda04be6, type: 2}
   SpeedUpBeadPrefab: {fileID: 197088, guid: fc2ef8e676e5c644eaa7d74c5ba1df92, type: 2}
+  MarkerBeadPrefab: {fileID: 0}
   NeedsReversing: 0
+  beadList: []
 --- !u!1 &1696202719
 GameObject:
   m_ObjectHideFlags: 0
@@ -2879,6 +2885,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rings:
   - {fileID: 1633678354}
+  - {fileID: 525753545}
+  - {fileID: 1645072480}
+  beadInterval: 2
 --- !u!4 &1835269867
 Transform:
   m_ObjectHideFlags: 0
