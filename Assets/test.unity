@@ -2887,6 +2887,7 @@ MonoBehaviour:
   - {fileID: 1633678354}
   - {fileID: 525753545}
   - {fileID: 1645072480}
+  beadInterval: 2
 --- !u!4 &1835269867
 Transform:
   m_ObjectHideFlags: 0

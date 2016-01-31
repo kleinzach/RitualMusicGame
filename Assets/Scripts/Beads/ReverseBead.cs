@@ -23,6 +23,7 @@ public class ReverseBead : Bead {
         {
             ring.NeedsReversing = true;
             useTimer = Time.time;
+            health--;
         }
     }
 }

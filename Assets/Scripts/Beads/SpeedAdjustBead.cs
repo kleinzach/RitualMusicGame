@@ -15,6 +15,7 @@ public class SpeedAdjustBead : Bead {
             speedAdjust = 1 / speedAdjust;
             useTimer = Time.time;
             Debug.Log("BEAT");
+            health--;
         }
     }
 
