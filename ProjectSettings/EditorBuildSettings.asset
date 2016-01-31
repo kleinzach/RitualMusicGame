@@ -15,3 +15,5 @@ EditorBuildSettings:
     path: Assets/Hard.unity
   - enabled: 1
     path: Assets/RitualMasterMode.unity
+  - enabled: 1
+    path: Assets/Very Hard.unity

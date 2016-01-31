@@ -2858,6 +2858,7 @@ MonoBehaviour:
   - {fileID: 1633678354}
   - {fileID: 525753545}
   - {fileID: 1645072480}
+  - {fileID: 1479379268}
   beadInterval: 0.5
   longBeadInterval: 10
   startSpeed: 1.25
