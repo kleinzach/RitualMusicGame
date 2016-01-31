@@ -37,7 +37,7 @@ public class DifficultyManager : MonoBehaviour {
     {
 		if (MusicManager.singleton.IsBeat)
 		{
-			MusicManager.singleton.Speed = startSpeed + Time.time * speedPerSecond;
+			MusicManager.singleton.Speed = startSpeed + Time.timeSinceLevelLoad * speedPerSecond;
 		}
         if (readyForAnother)
         {
