@@ -205,6 +205,7 @@ MonoBehaviour:
   squarePs: {fileID: 1614335377}
   source: {fileID: 68733100}
   missSound: {fileID: 8300000, guid: 7dd30e70b14c640428130a6dbb1a9e54, type: 3}
+  timer: {fileID: 0}
 --- !u!1 &223053793
 GameObject:
   m_ObjectHideFlags: 0
@@ -651,6 +652,7 @@ MonoBehaviour:
   snap3: {fileID: 24525710, guid: 37e6f0fe0f572e447b8fb9c7bfeef504, type: 2}
   scoreBreak3: 50
   snap4: {fileID: 24592100, guid: 37e6f0fe0f572e447b8fb9c7bfeef504, type: 2}
+  maxCombo: 0
 --- !u!4 &1079867413
 Transform:
   m_ObjectHideFlags: 0
@@ -810,6 +812,88 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
+--- !u!1001 &1534413300
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 22401552, guid: 2cb3d7259ffb31947936e7b9a6830288, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22401552, guid: 2cb3d7259ffb31947936e7b9a6830288, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22401552, guid: 2cb3d7259ffb31947936e7b9a6830288, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22401552, guid: 2cb3d7259ffb31947936e7b9a6830288, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22401552, guid: 2cb3d7259ffb31947936e7b9a6830288, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22401552, guid: 2cb3d7259ffb31947936e7b9a6830288, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22401552, guid: 2cb3d7259ffb31947936e7b9a6830288, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22401552, guid: 2cb3d7259ffb31947936e7b9a6830288, type: 2}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 22401552, guid: 2cb3d7259ffb31947936e7b9a6830288, type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22401552, guid: 2cb3d7259ffb31947936e7b9a6830288, type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22401552, guid: 2cb3d7259ffb31947936e7b9a6830288, type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22401552, guid: 2cb3d7259ffb31947936e7b9a6830288, type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22401552, guid: 2cb3d7259ffb31947936e7b9a6830288, type: 2}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22401552, guid: 2cb3d7259ffb31947936e7b9a6830288, type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22401552, guid: 2cb3d7259ffb31947936e7b9a6830288, type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22401552, guid: 2cb3d7259ffb31947936e7b9a6830288, type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22401552, guid: 2cb3d7259ffb31947936e7b9a6830288, type: 2}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22401552, guid: 2cb3d7259ffb31947936e7b9a6830288, type: 2}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 2cb3d7259ffb31947936e7b9a6830288, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1593761886
 GameObject:
   m_ObjectHideFlags: 0
@@ -2756,6 +2840,12 @@ MonoBehaviour:
   - {fileID: 525753545}
   - {fileID: 1645072480}
   beadInterval: 1
+  longBeadInterval: 100
+  startSpeed: 0
+  speedPerSecond: 0
+  timeLimit: 180
+  difficulty: Easy
+  beadPossibilities: []
 --- !u!4 &1835269867
 Transform:
   m_ObjectHideFlags: 0
