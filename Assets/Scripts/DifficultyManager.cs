@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class DifficultyManager : MonoBehaviour {
 
@@ -16,8 +17,16 @@ public class DifficultyManager : MonoBehaviour {
     public float startSpeed;
     public float speedPerSecond;
 
+    public float timeLimit = 180f;
+    public string difficulty = "Easy";
+
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
+        PlayerPrefs.SetString("Difficulty", difficulty);
+        PlayerPrefs.SetInt("Score", 0);
+        PlayerPrefs.SetInt("Last Scene", 0);
+        PlayerPrefs.SetInt("Max Combo", 0);
         singleton = this;
         nextBead = beadInterval;
         MusicManager.singleton.Speed = startSpeed;
@@ -41,8 +50,22 @@ public class DifficultyManager : MonoBehaviour {
             rings[Random.Range(0,rings.Count)].addBead();
             nextBead = longBeadInterval;
         }
+
+        Debug.Log(Time.timeSinceLevelLoad);
+        if(Time.timeSinceLevelLoad >= timeLimit)
+        {
+            EndGame();
+        }
 	}
 
+    public void EndGame()
+    {
+        PlayerPrefs.SetString("Difficulty", difficulty);
+        PlayerPrefs.SetInt("Score", (int)ScoreManager.singleton.Score);
+        PlayerPrefs.SetInt("Last Scene", SceneManager.GetActiveScene().buildIndex);
+        PlayerPrefs.SetInt("Max Combo", ScoreManager.singleton.maxCombo);
+        SceneManager.LoadScene(6);
+    }
 
     [System.Serializable]
     public struct BeadFrequency

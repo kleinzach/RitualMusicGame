@@ -43,9 +43,12 @@ public class ScoreManager : MonoBehaviour {
     public int scoreBreak3 = 50;
     public AudioMixerSnapshot snap4;
 
+    public int maxCombo;
+
     // Use this for initialization
     void Start () {
         Score = 0;
+        maxCombo = 0;
         singleton = this;
 	}
 	
@@ -88,6 +91,7 @@ public class ScoreManager : MonoBehaviour {
         if(accuracy > singleton.accuracyCutoff)
         {
             singleton.Combo++;
+            singleton.maxCombo = (int) Mathf.Max(singleton.maxCombo, singleton.Combo);
             singleton.Score += singleton.Combo;
         }
         else

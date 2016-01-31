@@ -24,4 +24,9 @@ public class LevelManager : MonoBehaviour {
     {
         Application.Quit();
     }
+
+    public void LoadLatestScene()
+    {
+        SceneManager.LoadScene(PlayerPrefs.GetInt("Last Scene"));
+    }
 }
