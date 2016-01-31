@@ -834,7 +834,7 @@ MonoBehaviour:
   beadInterval: 1
   longBeadInterval: 100
   startSpeed: 0.75
-  speedPerSecond: 0.0025
+  speedPerSecond: 0.001
   timeLimit: 180
   difficulty: Medium
   beadPossibilities:

@@ -3885,11 +3885,11 @@ ParticleSystem:
     m_UseMeshColors: 1
     randomDirection: 0
   EmissionModule:
-    enabled: 0
+    enabled: 1
     serializedVersion: 2
     m_Type: 0
     rate:
-      scalar: 0
+      scalar: 100
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -3935,7 +3935,7 @@ ParticleSystem:
     time1: 0.1
     time2: 0.1
     time3: 0.1
-    m_BurstCount: 4
+    m_BurstCount: 0
   SizeModule:
     enabled: 1
     curve:

@@ -76,7 +76,7 @@ public class MenuAudioSyncer : MonoBehaviour {
             nextBeat += secondsPerBeat;
 
             ps.SetParticles(null, 0);
-            ps.Emit(100);
+            ps.Emit(300);
         }
         else
         {
