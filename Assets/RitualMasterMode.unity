@@ -1587,7 +1587,7 @@ MonoBehaviour:
   rings: []
   beadInterval: 10000000
   startSpeed: 1
-  speedPerSecond: 0
+  speedPerSecond: 0.01
 --- !u!4 &1140147619
 Transform:
   m_ObjectHideFlags: 0
@@ -2207,6 +2207,7 @@ MonoBehaviour:
   speedBeatPlacer: {fileID: 67375373}
   speedBeatSprite: {fileID: 1195960785}
   speedBeatSpriteWithX: {fileID: 224439953}
+  MarkerPrefab: {fileID: 127220, guid: a57e9fa133c7d3a4f8393171ab97b2f9, type: 2}
 --- !u!4 &1530990749
 Transform:
   m_ObjectHideFlags: 0

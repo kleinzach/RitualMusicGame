@@ -352,7 +352,7 @@ public class BeatRing : MonoBehaviour
 		if (nearestBead)
 		{
 			Vector3 targetPosNoZ = new Vector3(targetPos.x, targetPos.y, nearestBead.transform.position.z);
-			if (Mathf.Abs(Vector3.Distance(nearestBead.transform.position, targetPosNoZ)) < 0.3f)
+			if (Mathf.Abs(Vector3.Distance(nearestBead.transform.position, targetPosNoZ)) < 1.0f)
 			{
 				if (nearestBead.GetType() == typeof(ReverseBead))
 				{

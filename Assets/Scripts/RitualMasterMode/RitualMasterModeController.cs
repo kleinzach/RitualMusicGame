@@ -10,6 +10,7 @@ public class RitualMasterModeController : MonoBehaviour
 	public GameObject speedBeatSprite;
 	public GameObject speedBeatSpriteWithX;
 
+	public GameObject MarkerPrefab;
 
 	void Update()
 	{
@@ -29,6 +30,8 @@ public class RitualMasterModeController : MonoBehaviour
 
 	private bool isThereASpeedUpOnScreen()
 	{
+		bool returnValue = false;
+
 		for (int beatRingIndex = 0; beatRingIndex < this.BeatRings.Count; beatRingIndex++)
 		{
 			for (int beatIndex = 0; beatIndex < this.BeatRings[beatRingIndex].beadList.Count; beatIndex++)
@@ -38,12 +41,19 @@ public class RitualMasterModeController : MonoBehaviour
 					Bead bead = this.BeatRings[beatRingIndex].beadList[beatIndex];
 					if (bead.GetType() == typeof(SpeedAdjustBead))
 					{
-						return true;
+						returnValue = true;
 					}
 				}
-			}			
+				else if ((this.BeatRings[beatRingIndex]) && (!this.BeatRings[beatRingIndex].beadList[beatIndex]))
+				{
+					Debug.Log("here");
+					GameObject go = GameObject.Instantiate(MarkerPrefab);
+					this.BeatRings[beatRingIndex].beadList[beatIndex] = null;
+					this.BeatRings[beatRingIndex].beadList[beatIndex] = go.GetComponent<Bead>();
+				}
+			}
 		}
 
-		return false;
+		return returnValue;
 	}
 }

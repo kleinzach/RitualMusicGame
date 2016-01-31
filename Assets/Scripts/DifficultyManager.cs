@@ -22,7 +22,10 @@ public class DifficultyManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        MusicManager.singleton.Speed = startSpeed + Time.time * speedPerSecond;
+		if (MusicManager.singleton.IsBeat)
+		{
+			MusicManager.singleton.Speed = startSpeed + Time.time * speedPerSecond;
+		}
         if (readyForAnother)
         {
             nextBead = beadInterval;
