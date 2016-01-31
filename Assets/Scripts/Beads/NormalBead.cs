@@ -16,6 +16,7 @@ public class NormalBead : Bead {
         ScoreManager.ScoreBead(this, accuracy);
         MainVisualizer.PlaySound(clip,accuracy);
         MainVisualizer.Hit(accuracy);
+        targetScale = Vector3.one * .25f;
         rend.color = hitColor;
         health--;
     }
@@ -23,7 +24,7 @@ public class NormalBead : Bead {
     public override void OnMiss()
     {
         targetScale = Vector3.one * 1.25f;
-        Debug.Log("Miss");
+        MainVisualizer.Miss();
         ScoreManager.Miss();
     }
 }

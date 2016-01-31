@@ -34,7 +34,7 @@ public class MainVisualizer : MonoBehaviour {
         ParticleSystem.Particle[] particles = new ParticleSystem.Particle[singleton.squarePs.particleCount];
         singleton.squarePs.GetParticles(particles);
         singleton.squarePs.SetParticles(particles, singleton.squarePs.particleCount);
-        singleton.squarePs.Emit((int)(ScoreManager.singleton.Combo * amount));
+        singleton.squarePs.Emit((int)((ScoreManager.singleton.Combo+10) * amount));
     }
 
     public static void Miss()
